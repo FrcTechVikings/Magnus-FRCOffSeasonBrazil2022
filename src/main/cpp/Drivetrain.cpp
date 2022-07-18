@@ -25,7 +25,7 @@ void Drivetrain::Drive(double yStick, double zStick, bool lock){
     ySpeed = -1 * yAxis * direction * lock * percentSpeed;
     zRotation = zAxis * lock * percentRotation;
 
-    m_robotDrive.ArcadeDrive(zRotation, ySpeed, true);
+    m_robotDrive.ArcadeDrive(ySpeed, zRotation);
     
 }
 
@@ -72,9 +72,13 @@ void Drivetrain::DrivetrainInit(){
 
     rearLeftDriving.SetNeutralMode(NeutralMode::Brake);
     rearRightDriving.SetNeutralMode(NeutralMode::Brake);
+    frontLeftDriving.SetNeutralMode(NeutralMode::Coast);
+    frontRightDriving.SetNeutralMode(NeutralMode::Coast);
 
-    leftDriveEncoder.SetDistancePerPulse(RobotConstants::wheelLenghtMeters/360.0); // In meters
-    rightDriveEconder.SetDistancePerPulse(RobotConstants::wheelLenghtMeters/360.0); // In meters
+    motorsRight.SetInverted(true);
+
+    leftDriveEncoder.SetDistancePerPulse(RobotConstants::wheelLenghtMeters/2048.0); // In meters
+    rightDriveEconder.SetDistancePerPulse(RobotConstants::wheelLenghtMeters/2048.0); // In meters
 
     leftDriveEncoder.Reset();
     rightDriveEconder.Reset();

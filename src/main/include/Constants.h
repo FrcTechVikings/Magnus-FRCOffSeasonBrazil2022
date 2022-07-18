@@ -45,10 +45,10 @@ namespace MotorsConstants {
 
 namespace SensorsConstants {
 
-    const int leftDriveEncoderDIO1 = 0;
-    const int leftDriveEncoderDIO2 = 1;
-    const int rightDriveEncoderDIO1 = 2;
-    const int rightDriveEncoderDIO2 = 3;
+    const int leftDriveEncoderAChannel = 0;
+    const int leftDriveEncoderBChannel = 1;
+    const int rightDriveEncoderAChannel = 2;
+    const int rightDriveEncoderBChannel = 3;
 
 }
 

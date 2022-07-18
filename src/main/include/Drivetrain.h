@@ -21,8 +21,8 @@ class Drivetrain{
 
         frc::DifferentialDrive m_robotDrive{motorsLeft, motorsRight};
 
-        frc::Encoder leftDriveEncoder {SensorsConstants::leftDriveEncoderDIO1, SensorsConstants::leftDriveEncoderDIO2};
-        frc::Encoder rightDriveEconder {SensorsConstants::rightDriveEncoderDIO1, SensorsConstants::rightDriveEncoderDIO2};
+        frc::Encoder leftDriveEncoder {SensorsConstants::leftDriveEncoderAChannel, SensorsConstants::leftDriveEncoderBChannel};
+        frc::Encoder rightDriveEconder {SensorsConstants::rightDriveEncoderAChannel, SensorsConstants::rightDriveEncoderBChannel, true};
 
         void DrivetrainLog();
         void Drive(double yAxis, double zAxis, bool lock);

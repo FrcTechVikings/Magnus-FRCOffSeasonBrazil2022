@@ -22,7 +22,9 @@
  *      ║
  *      ╠⇒ Organizar os arquivos em pastas para melhor compreensão?
  *      ║
- *      ╠⇒ Adicionar arquivo I/O
+ * Done ╠⇒ Adicionar arquivo I/O
+ *      ║
+ *      ╠⇒ navX-MXP aprender a usar e usar...
  *      ╨
  */
 
@@ -35,9 +37,7 @@ void Robot::RobotInit() {
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-  RobotDrivetrain.DrivetrainInit();
-  RobotIntake.IntakeInit();
-  RobotArm.ArmInit();
+  RobotCommands.InitCommands();
 
 }
 
@@ -55,12 +55,12 @@ void Robot::AutonomousInit() {
     
   }*/
 
-  RobotDrivetrain.frontLeftDriving.SetNeutralMode(NeutralMode::Brake);
-  RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
-  RobotDrivetrain.rearLeftDriving.SetNeutralMode(NeutralMode::Brake);
-  RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
+  RobotCommands.RobotDrivetrain.frontLeftDriving.SetNeutralMode(NeutralMode::Brake);
+  RobotCommands.RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
+  RobotCommands.RobotDrivetrain.rearLeftDriving.SetNeutralMode(NeutralMode::Brake);
+  RobotCommands.RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
 
-  RobotDrivetrain.ResetEncoders();
+  RobotCommands.RobotDrivetrain.ResetEncoders();
 
 }
 
@@ -72,64 +72,31 @@ void Robot::AutonomousPeriodic() {
   
   }*/
 
-  if(RobotDrivetrain.GetDistanceEncoder() < 1.0){
+  if(RobotCommands.RobotDrivetrain.GetDistanceEncoder() < 2.0){
 
-    RobotDrivetrain.m_robotDrive.TankDrive(0.7, 0.7);
+    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.5, -0.5);
 
   }else{
 
-    RobotDrivetrain.m_robotDrive.TankDrive(0.0, 0.0);
+    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.0, 0.0);
 
   }
 
-}
-
-void Robot::TeleopInit() {
-
-  RobotDrivetrain.frontLeftDriving.SetNeutralMode(NeutralMode::Coast);
-  RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Coast);
-  RobotDrivetrain.rearLeftDriving.SetNeutralMode(NeutralMode::Coast);
-  RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Coast);
-  //RobotDrivetrain.frontLeftDriving.SetNeutralMode(NeutralMode::Brake);
-  //RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
-  //RobotDrivetrain.rearLeftDriving.SetNeutralMode(NeutralMode::Brake);
-  //RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
+  RobotCommands.RobotDrivetrain.DrivetrainLog();
 
 }
+
+void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
 
-  // Drive
+  RobotCommands.PeriodicCommands();
 
-  RobotDrivetrain.Drive(pilotStick.GetY(), pilotStick.GetZ(), safeLock);
+  RobotCommands.PilotCommands();
 
-  // Pilot Stick
+  RobotCommands.OperatorCommands();
 
-  if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonBACK)){safeLock = !safeLock;}
-  if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonRB)){RobotDrivetrain.ChangeSpeed(1, DriveTrainConstants::percentGain);}
-  if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonLB)){RobotDrivetrain.ChangeSpeed(-1, DriveTrainConstants::percentGain);}
-  if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonRT)){RobotDrivetrain.ChangeToMaxSpeed();}
-  if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonLT)){RobotDrivetrain.ChangeToStandardSpeed();}
-  if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonY)){RobotDrivetrain.ChangeDirection();}
-
-  // Operator Stick
-
-  if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonBACK)){safeLock = !safeLock;}
-  if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonSTART)){RobotArm.ArmChangeDirection();}
-  if(operatorStick.GetRawButton(JoystickConstants::buttonX)) {RobotIntake.IntakeFeed(safeLock, IntakeConstants::percentIntake);}
-  else if(operatorStick.GetRawButton(JoystickConstants::buttonB)) {RobotIntake.IntakeFeed(safeLock, -1 * IntakeConstants::percentIntake);}
-  else {RobotIntake.IntakeFeed(safeLock, 0.0);}
-  if(operatorStick.GetRawButton(JoystickConstants::buttonY)) {RobotArm.ArmFeed(safeLock, ArmConstants::armPercent);}
-  else if(operatorStick.GetRawButton(JoystickConstants::buttonA)) {RobotArm.ArmFeed(safeLock, -1 * ArmConstants::armPercent);}
-  else {RobotArm.ArmKeepUp(ArmConstants::armKeepUp);}
-
-  // Log
-
-  RobotDrivetrain.DrivetrainLog();
-  RobotIntake.IntakeLog();
-  RobotArm.ArmLog();
-  frc::SmartDashboard::PutNumber("JoyY", pilotStick.GetY());
-  frc::SmartDashboard::PutNumber("JoyZ", pilotStick.GetZ());
+  RobotCommands.Log();
 
 }
 
@@ -139,23 +106,7 @@ void Robot::DisabledPeriodic() {}
 
 void Robot::TestInit() {}
 
-void Robot::TestPeriodic() {
-
-  throttle = pilotStick.GetRawAxis(1);
-  turn = pilotStick.GetRawAxis(3);
-  leftMtr = throttle + turn;
-  rightMtr = throttle - turn;
-
-  left = (leftMtr + skin(rightMtr)) * 0.8;
-  right = (rightMtr + skin(leftMtr)) * 0.8;
-
-  RobotDrivetrain.m_robotDrive.TankDrive(left, right, true);
-
-  //RobotDrivetrain.m_robotDrive.TankDrive(pilotStick.GetRawAxis(1), pilotStick.GetRawAxis(4), true);
-
-  //Controlar Arcade com um stick
-
-}
+void Robot::TestPeriodic() {}
 
 #ifndef RUNNING_FRC_TESTS
 int main() {

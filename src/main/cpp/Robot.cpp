@@ -10,7 +10,7 @@
  *      ║
  *      ╠⇒ Testar os encoders do chassi, verificar a aceitabilidade deles e testar o associado ao braço.
  *      ║
- *      ╠⇒ PID para o braço? Verificar o encoder na subida e descida automática -> Poderíamos ter um fim de curso... -> Tempo?
+ *      ╠⇒ PID para o braço? Verificar o encoder na subida e descida automática -> Poderíamos ter um fim de curso... -> Tempo? -> Teremos
  *      ║
  *      ╠⇒ Fazer o autônomo, definindo uma estratégia.
  *      ║
@@ -21,6 +21,8 @@
  *      ╠⇒ Afinar a deadband do controle e os valores para a velocidade do bot.
  *      ║
  *      ╠⇒ Organizar os arquivos em pastas para melhor compreensão?
+ *      ║
+ *      ╠⇒ Adicionar arquivo I/O
  *      ╨
  */
 

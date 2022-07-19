@@ -30,8 +30,11 @@ namespace IntakeConstants {
 
 namespace ArmConstants {
 
-    const double armPercent = 1.0;
+    const double armPercent = 0.9;
     const double armKeepUp = 0.05;
+    const double armTimeHoldSeconds = 0.0;
+    const double holdMotorPercent = 0.0;
+    const double operatorArmDeadBand = 0.1;
 
 }
 
@@ -43,6 +46,7 @@ namespace MotorsConstants {
     const int frontRightCIN = 3;
     const int armRedline = 4;
     const int intakeRedline = 5;
+    const int armSnowBlower = 6;
 
 }
 

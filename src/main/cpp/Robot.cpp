@@ -6,21 +6,21 @@
  *                                      │   TO DO LIST   │
  *                                      └────────────────┘ 
  *      ╥
- *      ╠⇒ Testar o método de drive, definir o melhor e afinar para o nosso robô.
+ * Done ╠⇒ Testar o método de drive, definir o melhor e afinar para o nosso robô.
  *      ║
- *      ╠⇒ Testar os encoders do chassi, verificar a aceitabilidade deles e testar o associado ao braço.
+ * Done ╠⇒ Testar os encoders do chassi, verificar a aceitabilidade deles.
  *      ║
  *      ╠⇒ PID para o braço? Verificar o encoder na subida e descida automática -> Poderíamos ter um fim de curso... -> Tempo? -> Teremos
  *      ║
  *      ╠⇒ Fazer o autônomo, definindo uma estratégia.
  *      ║
- *      ╠⇒ Brake ou coast, decida-se!
+ * Done ╠⇒ Brake ou coast, decida-se!
  *      ║
  *      ╠⇒ Comentar o código e organizar um pouco mais, removendo as inutilidades e valores temporários.
  *      ║
- *      ╠⇒ Afinar a deadband do controle e os valores para a velocidade do bot.
+ * Done ╠⇒ Afinar a deadband do controle e os valores para a velocidade do bot.
  *      ║
- *      ╠⇒ Organizar os arquivos em pastas para melhor compreensão?
+ * Done ╠⇒ Organizar os arquivos em pastas para melhor compreensão?
  *      ║
  * Done ╠⇒ Adicionar arquivo I/O
  *      ║
@@ -72,13 +72,27 @@ void Robot::AutonomousPeriodic() {
   
   }*/
 
-  if(RobotCommands.RobotDrivetrain.GetDistanceEncoder() < 2.0){
+  /*if(RobotCommands.RobotDrivetrain.GetDistanceEncoder() < 2.0){
 
-    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.5, -0.5);
+    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.5, 0.5);
+
+  }else if (RobotCommands.RobotDrivetrain.GetDistanceEncoder() > 2.05){
+
+    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(-0.5, -0.5);
 
   }else{
 
-    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.0, 0.0);
+    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0, 0);
+
+  }*/
+
+  if(RobotCommands.RobotDrivetrain.GetDistanceEncoder() < 2.0){
+
+    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.5, 0.5);
+
+  }else{
+
+    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0, 0);
 
   }
 

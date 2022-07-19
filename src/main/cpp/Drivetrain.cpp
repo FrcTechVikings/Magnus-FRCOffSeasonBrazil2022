@@ -8,19 +8,14 @@ void Drivetrain::DrivetrainLog(){
 
     frc::SmartDashboard::PutNumber("Encoder esquerdo metros", leftDriveEncoder.GetDistance());
     frc::SmartDashboard::PutNumber("Encoder direito metros", rightDriveEconder.GetDistance());
-    frc::SmartDashboard::PutNumber("Média dos encoders", (abs(rightDriveEconder.GetDistance() + leftDriveEncoder.GetDistance())/2));
+    frc::SmartDashboard::PutNumber("Média dos encoders", GetDistanceEncoder());
 
 }
 
 void Drivetrain::Drive(double yStick, double zStick, bool lock){
 
-    if(abs(yStick) >= JoystickConstants::yStickBand){
-        yAxis = (0.5 * pow(yStick, 3) + (0.5 * yStick));
-    }else{yAxis = 0;}
-
-    if(abs(zStick) >= JoystickConstants::zStickBand){
-        zAxis = (0.5 * pow(zStick, 3) + (0.5 * zStick));
-    }else{zAxis = 0;}
+    yAxis = (0.5 * pow(yStick, 3) + (0.5 * yStick));
+    zAxis = (0.5 * pow(zStick, 3) + (0.5 * zStick));
 
     ySpeed = -1 * yAxis * direction * lock * percentSpeed;
     zRotation = zAxis * lock * percentRotation;
@@ -94,6 +89,12 @@ void Drivetrain::ResetEncoders(){
 
 double Drivetrain::GetDistanceEncoder(){
 
-    return abs(leftDriveEncoder.GetDistance() + rightDriveEconder.GetDistance())/2;
+    double left = leftDriveEncoder.GetDistance();
+    double right = rightDriveEconder.GetDistance();
+
+    if(left < 0) left *= -1;
+    if(right <0) right *= -1;
+
+    return ((left + right)/2);
 
 }

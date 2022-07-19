@@ -21,7 +21,10 @@ namespace RobotConstants {
 
 namespace IntakeConstants {
 
-    const double percentIntake = 1.0;
+    const double percentIntakeStandard = 1.0;
+    const double maxPercentIntake = 1.0;
+    const double minPercentIntake = 0.5;
+    const double percentGain = 0.1;
 
 }
 

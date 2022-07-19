@@ -11,7 +11,13 @@ class Intake {
         WPI_VictorSPX intakeMotor = {MotorsConstants::intakeRedline};
 
         void IntakeLog();
-        void IntakeFeed(bool lock, double percent);
+        void IntakeFeed(bool lock, int direction);
         void IntakeInit();
+        void IntakeChangeSpeed(int proportion);
+    
+    private:
+
+        double percent = IntakeConstants::percentIntakeStandard;
+        double gain = IntakeConstants::percentGain;
 
 };

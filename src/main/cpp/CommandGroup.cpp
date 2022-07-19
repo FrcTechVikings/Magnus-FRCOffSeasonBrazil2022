@@ -29,12 +29,14 @@ void CommandGroup::OperatorCommands(){
 
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonBACK)){safeLock = !safeLock;}
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonSTART)){RobotArm.ArmChangeDirection();}
-    if(operatorStick.GetRawButton(JoystickConstants::buttonX)) {RobotIntake.IntakeFeed(safeLock, IntakeConstants::percentIntake);}
-    else if(operatorStick.GetRawButton(JoystickConstants::buttonB)) {RobotIntake.IntakeFeed(safeLock, -1 * IntakeConstants::percentIntake);}
+    if(operatorStick.GetRawButton(JoystickConstants::buttonX)) {RobotIntake.IntakeFeed(safeLock, 1);}
+    else if(operatorStick.GetRawButton(JoystickConstants::buttonB)) {RobotIntake.IntakeFeed(safeLock, -1);}
     else {RobotIntake.IntakeFeed(safeLock, 0.0);}
     if(operatorStick.GetRawButton(JoystickConstants::buttonY)) {RobotArm.ArmFeed(safeLock, ArmConstants::armPercent);}
     else if(operatorStick.GetRawButton(JoystickConstants::buttonA)) {RobotArm.ArmFeed(safeLock, -1 * ArmConstants::armPercent);}
     else {RobotArm.ArmKeepUp(ArmConstants::armKeepUp);}
+    if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonRB)){RobotIntake.IntakeChangeSpeed(1);}
+    if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonLB)){RobotIntake.IntakeChangeSpeed(-1);}
 
 }
 

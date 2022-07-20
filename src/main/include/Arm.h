@@ -3,7 +3,6 @@
 #include "ctre/Phoenix.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "Constants.h"
-#include <frc/Timer.h>
 
 class Arm {
 
@@ -16,16 +15,11 @@ class Arm {
         void ArmFeed(bool lock, double percent);
         void ArmKeepUp(double percent);
         void ArmChangeDirection();
+        void ArmHolderFeed(bool lock, int direction);
         void ArmInit();
-        void ArmHoldState();
-        void ArmPeriodicCheck();
 
     private:
 
-        frc::Timer armTimer;
-
         int operatorDirection = 1;
-        double motorTranslationTime = 0.0;
-        bool armIsHeld = true;
 
 };

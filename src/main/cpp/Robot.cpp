@@ -24,7 +24,7 @@
  *      ║
  * Done ╠⇒ Adicionar arquivo I/O
  *      ║
- *      ╠⇒ navX-MXP aprender a usar e usar...
+ *      ╠⇒ navX-MXP aprender a usar e usar... -> Esquece
  *      ╨
  */
 

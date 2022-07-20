@@ -30,10 +30,9 @@ namespace IntakeConstants {
 
 namespace ArmConstants {
 
-    const double armPercent = 0.9;
+    const double armPercentMax = 0.8;
     const double armKeepUp = 0.05;
-    const double armTimeHoldSeconds = 0.0;
-    const double holdMotorPercent = 0.0;
+    const double holderPercent = 0.3;
     const double operatorArmDeadBand = 0.1;
 
 }
@@ -56,6 +55,9 @@ namespace SensorsConstants {
     const int leftDriveEncoderBChannel = 1;
     const int rightDriveEncoderAChannel = 2;
     const int rightDriveEncoderBChannel = 3;
+
+    const int topMicroSwitchDIO = 4;
+    const int bottomMicroSwitchDIO = 5;
 
 }
 

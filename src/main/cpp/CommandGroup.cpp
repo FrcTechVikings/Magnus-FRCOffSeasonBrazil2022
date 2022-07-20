@@ -11,11 +11,10 @@ void CommandGroup::InitCommands(){
 void CommandGroup::PeriodicCommands(){
 
     RobotDrivetrain.Drive(pilotStick.GetY(), pilotStick.GetZ(), safeLock);
-    RobotArm.ArmPeriodicCheck();
 
     if(operatorStick.GetY() > ArmConstants::operatorArmDeadBand || operatorStick.GetY() < -1 * ArmConstants::operatorArmDeadBand){
 
-        RobotArm.ArmFeed(safeLock, operatorStick.GetY());
+        RobotArm.ArmFeed(safeLock, -1 * operatorStick.GetY());
 
     }else{
 
@@ -45,7 +44,9 @@ void CommandGroup::OperatorCommands(){
     else {RobotIntake.IntakeFeed(safeLock, 0.0);}
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonRB)){RobotIntake.IntakeChangeSpeed(1);}
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonLB)){RobotIntake.IntakeChangeSpeed(-1);}
-    if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonRT)){RobotArm.ArmHoldState();}
+    if(operatorStick.GetRawButton(JoystickConstants::buttonRT)){RobotArm.ArmHolderFeed(safeLock, 1);}
+    else if (operatorStick.GetRawButton(JoystickConstants::buttonLT)){RobotArm.ArmHolderFeed(safeLock, -1);}
+    else {RobotArm.ArmHolderFeed(0, 0);}
 
 }
 
@@ -58,5 +59,6 @@ void CommandGroup::Log(){
     frc::SmartDashboard::PutNumber("Piloto JoyY", pilotStick.GetY());
     frc::SmartDashboard::PutNumber("Piloto JoyZ", pilotStick.GetZ());
     frc::SmartDashboard::PutNumber("Operador JoyY", operatorStick.GetY());
+    frc::SmartDashboard::PutNumber("SafeLock", safeLock);
     
 }

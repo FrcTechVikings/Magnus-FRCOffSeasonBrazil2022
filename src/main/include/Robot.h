@@ -11,6 +11,9 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/Joystick.h>
 #include <frc/Timer.h>
+#include <frc/SPI.h>
+
+#include "AHRS.h"
 
 #include "CommandGroup.h"
 

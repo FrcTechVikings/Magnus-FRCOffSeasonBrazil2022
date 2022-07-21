@@ -11,16 +11,7 @@ void CommandGroup::InitCommands(){
 void CommandGroup::PeriodicCommands(){
 
     RobotDrivetrain.Drive(pilotStick.GetY(), pilotStick.GetZ(), safeLock);
-
-    if(operatorStick.GetY() > ArmConstants::operatorArmDeadBand || operatorStick.GetY() < -1 * ArmConstants::operatorArmDeadBand){
-
-        RobotArm.ArmFeed(safeLock, -1 * operatorStick.GetY());
-
-    }else{
-
-        RobotArm.ArmKeepUp(ArmConstants::armKeepUp);
-
-    }
+    RobotArm.ArmPeriodic(safeLock, operatorStick.GetY());
 
 }
 
@@ -47,6 +38,8 @@ void CommandGroup::OperatorCommands(){
     if(operatorStick.GetRawButton(JoystickConstants::buttonRT)){RobotArm.ArmHolderFeed(safeLock, 1);}
     else if (operatorStick.GetRawButton(JoystickConstants::buttonLT)){RobotArm.ArmHolderFeed(safeLock, -1);}
     else {RobotArm.ArmHolderFeed(0, 0);}
+    if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonY)){RobotArm.ArmSwitchUp();}
+    else if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonA)){RobotArm.ArmSwitchDown();}
 
 }
 

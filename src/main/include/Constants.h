@@ -32,8 +32,11 @@ namespace ArmConstants {
 
     const double armPercentMax = 0.8;
     const double armKeepUp = 0.05;
-    const double holderPercent = 0.3;
-    const double operatorArmDeadBand = 0.1;
+    const double holderPercent = 0.4;
+    const double operatorArmDeadBand = 0.35;
+
+    const double armPercentUp = 0.7;
+    const double armPercentDown = -0.6;
 
 }
 
@@ -56,8 +59,8 @@ namespace SensorsConstants {
     const int rightDriveEncoderAChannel = 2;
     const int rightDriveEncoderBChannel = 3;
 
-    const int topMicroSwitchDIO = 4;
-    const int bottomMicroSwitchDIO = 5;
+    const int bottomMicroSwitchDIO = 4;
+    const int topMicroSwitchDIO = 5;
 
 }
 

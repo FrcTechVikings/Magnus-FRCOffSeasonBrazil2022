@@ -6,25 +6,9 @@
  *                                      │   TO DO LIST   │
  *                                      └────────────────┘ 
  *      ╥
- * Done ╠⇒ Testar o método de drive, definir o melhor e afinar para o nosso robô.
- *      ║
- * Done ╠⇒ Testar os encoders do chassi, verificar a aceitabilidade deles.
- *      ║
- *      ╠⇒ PID para o braço? Verificar o encoder na subida e descida automática -> Poderíamos ter um fim de curso... -> Tempo? -> Teremos
- *      ║
  *      ╠⇒ Fazer o autônomo, definindo uma estratégia.
  *      ║
- * Done ╠⇒ Brake ou coast, decida-se!
- *      ║
  *      ╠⇒ Comentar o código e organizar um pouco mais, removendo as inutilidades e valores temporários.
- *      ║
- * Done ╠⇒ Afinar a deadband do controle e os valores para a velocidade do bot.
- *      ║
- * Done ╠⇒ Organizar os arquivos em pastas para melhor compreensão?
- *      ║
- * Done ╠⇒ Adicionar arquivo I/O
- *      ║
- *      ╠⇒ navX-MXP aprender a usar e usar... -> Esquece
  *      ╨
  */
 
@@ -38,7 +22,10 @@ void Robot::RobotInit() {
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
   RobotCommands.InitCommands();
-
+  
+  TempTimer.Reset();
+  TempTimer.Start();
+  //tempmteptmeptmpetmpeemtpm
 }
 
 void Robot::RobotPeriodic() {}
@@ -100,7 +87,11 @@ void Robot::AutonomousPeriodic() {
 
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+
+  RobotCommands.InitCommands();
+
+}
 
 void Robot::TeleopPeriodic() {
 
@@ -112,15 +103,34 @@ void Robot::TeleopPeriodic() {
 
   RobotCommands.Log();
 
+  frc::SmartDashboard::PutNumber("Tempo de partid", (135.0 - TempTimer.Get().value()));
+  //temptmepteptmeptmtpep
 }
 
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() {
+
+  TempTimer.Reset();
+  //temtpemtpemtepm
+
+}
 
 void Robot::DisabledPeriodic() {}
 
-void Robot::TestInit() {}
+void Robot::TestInit() {
 
-void Robot::TestPeriodic() {}
+  RobotCommands.InitCommands();
+  
+}
+
+void Robot::TestPeriodic() {
+
+  RobotCommands.RobotArm.ArmPeriodic(1, RobotCommands.operatorStick.GetY());
+
+  RobotCommands.OperatorCommands();
+
+  RobotCommands.Log();
+
+}
 
 #ifndef RUNNING_FRC_TESTS
 int main() {

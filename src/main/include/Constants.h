@@ -21,9 +21,10 @@ namespace RobotConstants {
 
 namespace IntakeConstants {
 
-    const double percentIntakeStandard = 1.0;
-    const double maxPercentIntake = 1.0;
-    const double minPercentIntake = 0.5;
+    const double percentIntakeStandardCollect = 1.0;
+    const double percentIntakeStandardRelease = 0.7;
+    const double maxPercentIntakeRelease = 1.0;
+    const double minPercentIntakeRelease = 0.5;
     const double percentGain = 0.1;
 
 }
@@ -34,9 +35,8 @@ namespace ArmConstants {
     const double armKeepUp = 0.05;
     const double holderPercent = 0.4;
     const double operatorArmDeadBand = 0.35;
-
-    const double armPercentUp = 0.7;
-    const double armPercentDown = -0.6;
+    const double armPercentUp = 0.9;
+    const double armPercentDown = -0.8;
 
 }
 
@@ -58,7 +58,6 @@ namespace SensorsConstants {
     const int leftDriveEncoderBChannel = 1;
     const int rightDriveEncoderAChannel = 2;
     const int rightDriveEncoderBChannel = 3;
-
     const int bottomMicroSwitchDIO = 4;
     const int topMicroSwitchDIO = 5;
 

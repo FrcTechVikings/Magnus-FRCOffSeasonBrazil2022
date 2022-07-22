@@ -2,13 +2,13 @@
 
 void Intake::IntakeLog(){
 
-    frc::SmartDashboard::PutNumber("Nível Intake", percent * 10);
+    frc::SmartDashboard::PutNumber("Nível Intake", ReleasePercent * 10);
 
 }
 
-void Intake::IntakeFeed(bool lock, int direction){
+void Intake::IntakeFeed(bool lock, int direction, double velocity){
 
-    intakeMotor.Set(ControlMode::PercentOutput, lock * percent * direction);
+    intakeMotor.Set(ControlMode::PercentOutput, lock * velocity * direction);
 
 }
 
@@ -20,15 +20,15 @@ void Intake::IntakeInit(){
 
 void Intake::IntakeChangeSpeed(int proportion){
 
-    percent += gain*proportion;
+    ReleasePercent += gain*proportion;
 
-    if(percent > IntakeConstants::maxPercentIntake){
+    if(ReleasePercent > IntakeConstants::maxPercentIntakeRelease){
 
-        percent = IntakeConstants::maxPercentIntake;
+        ReleasePercent = IntakeConstants::maxPercentIntakeRelease;
 
-    }else if(percent < IntakeConstants::minPercentIntake){
+    }else if(ReleasePercent < IntakeConstants::minPercentIntakeRelease){
 
-        percent = IntakeConstants::minPercentIntake;
+        ReleasePercent = IntakeConstants::minPercentIntakeRelease;
 
     }
 

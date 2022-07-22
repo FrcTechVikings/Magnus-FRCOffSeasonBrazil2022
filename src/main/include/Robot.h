@@ -40,5 +40,9 @@ class Robot : public frc::TimedRobot {
   std::string m_autoSelected;
 
   CommandGroup RobotCommands;
+
+  //Temp value
+
+  frc::Timer TempTimer;
   
 };

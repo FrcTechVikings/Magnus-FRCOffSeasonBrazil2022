@@ -72,13 +72,13 @@ void Arm::ArmPeriodic(bool lock, double JoyStickY){
 
     if(armControlDirection == 1){
 
-        armMotor.Set(ControlMode::PercentOutput, ArmConstants::armPercentUp);
+        armMotor.Set(ControlMode::PercentOutput, ArmConstants::armPercentUp * lock);
 
         if(topLimitSwitch.Get()){armControlDirection = 0;}
 
     }else if(armControlDirection == -1){
 
-        armMotor.Set(ControlMode::PercentOutput, ArmConstants::armPercentDown);
+        armMotor.Set(ControlMode::PercentOutput, ArmConstants::armPercentDown * lock);
 
         if(bottomLimitSwitch.Get()){armControlDirection = 0;}
 

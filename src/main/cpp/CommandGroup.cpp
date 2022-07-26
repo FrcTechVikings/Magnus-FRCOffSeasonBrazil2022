@@ -6,6 +6,8 @@ void CommandGroup::InitCommands(){
     RobotIntake.IntakeInit();
     RobotArm.ArmInit();
 
+    safeLock = 1;
+
 }
 
 void CommandGroup::PeriodicCommands(){
@@ -29,7 +31,6 @@ void CommandGroup::PilotCommands(){
 void CommandGroup::OperatorCommands(){
 
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonBACK)){safeLock = !safeLock;}
-    if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonSTART)){RobotArm.ArmChangeDirection();}
     if(operatorStick.GetRawButton(JoystickConstants::buttonX)) {RobotIntake.IntakeFeed(safeLock, 1, RobotIntake.ReleasePercent);}
     else if(operatorStick.GetRawButton(JoystickConstants::buttonB)) {RobotIntake.IntakeFeed(safeLock, -1, IntakeConstants::percentIntakeStandardCollect);}
     else {RobotIntake.IntakeFeed(safeLock, 0.0, 0.0);}

@@ -16,6 +16,15 @@ void Intake::IntakeInit(){
 
     intakeMotor.SetNeutralMode(NeutralMode::Coast);
 
+    intakeMotor.SetSafetyEnabled(true);
+    intakeMotor.SetExpiration(100_ms);
+
+    intakeMotor.ConfigOpenloopRamp(0.0);
+
+    intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+
+    ReleasePercent = IntakeConstants::percentIntakeStandardRelease;
+
 }
 
 void Intake::IntakeChangeSpeed(int proportion){

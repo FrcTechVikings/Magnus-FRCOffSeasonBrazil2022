@@ -23,9 +23,6 @@ void Robot::RobotInit() {
 
   RobotCommands.InitCommands();
   
-  TempTimer.Reset();
-  TempTimer.Start();
-  //tempmteptmeptmpetmpeemtpm
 }
 
 void Robot::RobotPeriodic() {}
@@ -59,20 +56,6 @@ void Robot::AutonomousPeriodic() {
   
   }*/
 
-  /*if(RobotCommands.RobotDrivetrain.GetDistanceEncoder() < 2.0){
-
-    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.5, 0.5);
-
-  }else if (RobotCommands.RobotDrivetrain.GetDistanceEncoder() > 2.05){
-
-    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(-0.5, -0.5);
-
-  }else{
-
-    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0, 0);
-
-  }*/
-
   if(RobotCommands.RobotDrivetrain.GetDistanceEncoder() < 2.0){
 
     RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.5, 0.5);
@@ -103,34 +86,19 @@ void Robot::TeleopPeriodic() {
 
   RobotCommands.Log();
 
-  frc::SmartDashboard::PutNumber("Tempo de partid", (135.0 - TempTimer.Get().value()));
-  //temptmepteptmeptmtpep
 }
 
 void Robot::DisabledInit() {
 
-  TempTimer.Reset();
-  //temtpemtpemtepm
+  RobotCommands.InitCommands();
 
 }
 
 void Robot::DisabledPeriodic() {}
 
-void Robot::TestInit() {
+void Robot::TestInit() {}
 
-  RobotCommands.InitCommands();
-  
-}
-
-void Robot::TestPeriodic() {
-
-  RobotCommands.RobotArm.ArmPeriodic(1, RobotCommands.operatorStick.GetY());
-
-  RobotCommands.OperatorCommands();
-
-  RobotCommands.Log();
-
-}
+void Robot::TestPeriodic() {}
 
 #ifndef RUNNING_FRC_TESTS
 int main() {

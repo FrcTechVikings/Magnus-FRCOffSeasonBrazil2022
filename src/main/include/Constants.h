@@ -4,11 +4,11 @@ namespace DriveTrainConstants {
 
     const double percentGain = 0.1;
     const double maxSpeedPercentConstrain = 1.0;
-    const double minSpeedPercentConstrain = 0.4;
-    const double maxRotationPercentConstrain = 1.05;
-    const double minRotationPercentConstrain = 0.45;
-    const double standardPercentSpeed = 0.7;
-    const double standardPercentRotation = 0.75;
+    const double minSpeedPercentConstrain = 0.2;
+    const double maxRotationPercentConstrain = 0.85;
+    const double minRotationPercentConstrain = 0.05;
+    const double standardPercentSpeed = 0.6;
+    const double standardPercentRotation = 0.45;
 
 }
 
@@ -33,7 +33,7 @@ namespace ArmConstants {
 
     const double armPercentMax = 0.8;
     const double armKeepUp = 0.05;
-    const double holderPercent = 0.4;
+    const double holderPercent = 0.6;
     const double operatorArmDeadBand = 0.35;
     const double armPercentUp = 0.9;
     const double armPercentDown = -0.8;

@@ -1,6 +1,3 @@
-// Make the f PID -> With what?
-// Make the f one button click do -> Doing rn
-
 #include "Arm.h"
 
 void Arm::ArmLog(){
@@ -16,21 +13,15 @@ void Arm::ArmFeed(bool lock, double percent){
 
     if(percent > ArmConstants::operatorArmDeadBand || percent < -1 * ArmConstants::operatorArmDeadBand){
         
-        operatorStickValue = -1 * operatorDirection * percent * lock * ArmConstants::armPercentMax;
+        operatorStickValue = -1 * percent * lock * ArmConstants::armPercentMax;
         
     }else{
         
-        operatorStickValue = ArmConstants::armKeepUp * operatorDirection * (!bottomLimitSwitch.Get());
+        operatorStickValue = ArmConstants::armKeepUp * (!bottomLimitSwitch.Get());
         
     }
 
     armMotor.Set(ControlMode::PercentOutput, operatorStickValue);
-
-}
-
-void Arm::ArmChangeDirection(){
-
-    operatorDirection *= -1;
 
 }
 
@@ -45,18 +36,29 @@ void Arm::ArmInit(){
     armMotor.SetNeutralMode(NeutralMode::Brake);
     armHolder.SetNeutralMode(NeutralMode::Brake);
 
+    armMotor.ConfigOpenloopRamp(0.2);
+
+    armMotor.SetSafetyEnabled(true);
+    armMotor.SetExpiration(100_ms);
+
+    armHolder.SetSafetyEnabled(true);
+    armHolder.SetExpiration(100_ms);
+
+    armMotor.Set(ControlMode::PercentOutput, 0.0);
+    armHolder.Set(ControlMode::PercentOutput, 0.0);
+
+    armControlDirection = 0;
+
 }
 
 void Arm::ArmSwitchUp(){
 
-    //if(armIsUp == false){armControlDirection = 1;}
     armControlDirection = 1;
 
 }
 
 void Arm::ArmSwitchDown(){
 
-    //if(armIsUp == true){armControlDirection = -1;}
     armControlDirection = -1;
 
 }
@@ -87,6 +89,8 @@ void Arm::ArmPeriodic(bool lock, double JoyStickY){
         ArmFeed(lock, JoyStickY);
 
     }
+
+    if(lock == 0){armControlDirection = 0;}
 
     ArmState();
 

@@ -19,6 +19,6 @@ class Intake {
     
     private:
 
-        double gain = IntakeConstants::percentGain;
+        const double gain = IntakeConstants::percentGain;
 
 };

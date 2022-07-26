@@ -20,7 +20,6 @@ class Arm {
 
         void ArmLog();
         void ArmFeed(bool lock, double percent);
-        void ArmChangeDirection();
         void ArmHolderFeed(bool lock, int direction);
         void ArmSwitchUp();
         void ArmSwitchDown();
@@ -30,7 +29,6 @@ class Arm {
 
     private:
 
-        int operatorDirection = 1;
         double operatorStickValue = 0.0;
         int armControlDirection = 0;
 

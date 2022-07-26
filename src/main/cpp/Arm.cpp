@@ -36,7 +36,7 @@ void Arm::ArmInit(){
     armMotor.SetNeutralMode(NeutralMode::Brake);
     armHolder.SetNeutralMode(NeutralMode::Brake);
 
-    armMotor.ConfigOpenloopRamp(0.2);
+    armMotor.ConfigOpenloopRamp(0.1);
 
     armMotor.SetSafetyEnabled(true);
     armMotor.SetExpiration(100_ms);

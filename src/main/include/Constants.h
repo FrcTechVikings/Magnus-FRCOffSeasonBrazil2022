@@ -34,7 +34,7 @@ namespace ArmConstants {
     const double armPercentMax = 0.8;
     const double armKeepUp = 0.05;
     const double holderPercent = 0.6;
-    const double operatorArmDeadBand = 0.35;
+    const double operatorArmDeadBand = 0.5;
     const double armPercentUp = 0.9;
     const double armPercentDown = -0.8;
 

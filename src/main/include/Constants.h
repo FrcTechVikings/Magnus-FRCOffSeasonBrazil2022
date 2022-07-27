@@ -2,10 +2,35 @@
 
 namespace AutoConstants{
 
-    const std::string DefaultOption = "Sair Tarmac";
-    const std::string FirstOption = "Sair Tarmac com delay";
-    const std::string SecondOption = "Uma bola auto";
-    const std::string ThirdOption = "Uma bola auto com delay";
+    const std::string ExitTarmacOption = "Sair Tarmac";
+    const std::string ExitTarmacDelayOption = "Sair Tarmac Com Delay";
+    const std::string OneCargoAutoOption = "Uma Cargo";
+    const std::string OneCargoAutoDelayOption = "Uma Cargo Com Delay";
+
+    namespace OneCargoAuto{
+
+        const double delayOneCargoAuto = 7.0; // Seconds ////////// Definir ainda!
+
+        const double robotStartConfigTime = 0.5; // Seconds
+        const double slightlyWalkForwardTime = 1.7; // Seconds
+        const double intakeShootTime = 2.9; // Seconds
+        const double exitingTarmacTime = 6.4; // Seconds
+
+        const double slightlyWalkForwardDistance = 0.25; // Meters
+        const double exitingTarmacDistance = 2.2; // Meters
+
+    }
+
+    namespace ExitTarmac{
+
+        const double delayExitTarmacAuto = 7.0; // Seconds ////////// Definir ainda!
+
+        const double robotStartConfigTime = 0.5; // Seconds
+        const double exitingTarmacTime = 6.5; // Seconds
+
+        const double exitingTarmacDistance = 2.0; // Meters
+
+    }
 
 }
 
@@ -87,9 +112,5 @@ namespace JoystickConstants {
     const int buttonRT = 8;
     const int buttonBACK = 9;
     const int buttonSTART = 10;
-    const int AxisY = 1; // Left joystick up and down
-    const int AxisX = 2; // Left joystick left and right
-    const int AxisZ = 3; // Right joystick left and right
-    const int OtherAxis = 4; // Right joystick up and down
 
 }

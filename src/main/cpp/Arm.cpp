@@ -46,9 +46,6 @@ void Arm::ArmInit(){
     armHolder.SetSafetyEnabled(true);
     armHolder.SetExpiration(100_ms);
 
-    armMotor.Set(ControlMode::PercentOutput, 0.0);
-    armHolder.Set(ControlMode::PercentOutput, 0.0);
-
     armControlDirection = 0;
 
 }

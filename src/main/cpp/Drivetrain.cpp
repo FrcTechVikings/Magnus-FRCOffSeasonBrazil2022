@@ -15,7 +15,6 @@ void Drivetrain::DrivetrainLog(){
 void Drivetrain::Drive(double yStick, double zStick, bool lock){
 
     yAxis = (0.5 * pow(yStick, 3) + (0.5 * yStick));
-    //zAxis = (0.5 * pow(zStick, 3) + (0.5 * zStick));
     zAxis = zStick;
 
     ySpeed = -1 * yAxis * direction * lock * percentSpeed;
@@ -76,15 +75,10 @@ void Drivetrain::DrivetrainInit(){
     leftDriveEncoder.SetDistancePerPulse(RobotConstants::wheelLenghtMeters/2048.0); // In meters
     rightDriveEconder.SetDistancePerPulse(RobotConstants::wheelLenghtMeters/2048.0); // In meters
 
-    rearLeftDriving.ConfigOpenloopRamp(0.0);
-    rearRightDriving.ConfigOpenloopRamp(0.0);
-    frontLeftDriving.ConfigOpenloopRamp(0.0);
-    frontRightDriving.ConfigOpenloopRamp(0.0);
-
     m_robotDrive.SetSafetyEnabled(true);
     m_robotDrive.SetExpiration(100_ms);
 
-    m_robotDrive.ArcadeDrive(0.0, 0.0);
+    m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
     leftDriveEncoder.Reset();
     rightDriveEconder.Reset();

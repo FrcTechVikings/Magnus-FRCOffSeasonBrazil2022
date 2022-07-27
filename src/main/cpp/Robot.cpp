@@ -6,7 +6,11 @@
  *                                      │   TO DO LIST   │
  *                                      └────────────────┘ 
  *      ╥
- *      ╠⇒ Fazer o autônomo, definindo uma estratégia.
+ *      ╠⇒ Calibrar o autônomo e afins
+ *      ║
+ *      ╠⇒ Deixar a Shuffleboard bonita
+ *      ║
+ *      ╠⇒ Estratégias usadas para fazer as programações
  *      ║
  *      ╠⇒ Comentar o código e organizar um pouco mais, removendo as inutilidades e valores temporários.
  *      ╨
@@ -16,10 +20,10 @@
 
 void Robot::RobotInit() {
 
-  m_chooser.SetDefaultOption(AutoConstants::DefaultOption, AutoConstants::DefaultOption);
-  m_chooser.AddOption(AutoConstants::FirstOption, AutoConstants::FirstOption);
-  m_chooser.AddOption(AutoConstants::SecondOption, AutoConstants::SecondOption);
-  m_chooser.AddOption(AutoConstants::ThirdOption, AutoConstants::ThirdOption);
+  m_chooser.SetDefaultOption(AutoConstants::ExitTarmacOption, AutoConstants::ExitTarmacOption);
+  m_chooser.AddOption(AutoConstants::ExitTarmacDelayOption, AutoConstants::ExitTarmacDelayOption);
+  m_chooser.AddOption(AutoConstants::OneCargoAutoOption, AutoConstants::OneCargoAutoOption);
+  m_chooser.AddOption(AutoConstants::OneCargoAutoDelayOption, AutoConstants::OneCargoAutoDelayOption);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
   RobotCommands.InitCommands();
@@ -37,21 +41,21 @@ void Robot::AutonomousInit() {
 
 void Robot::AutonomousPeriodic() {
 
-  if (m_autoSelected == AutoConstants::DefaultOption){
+  if (m_autoSelected == AutoConstants::ExitTarmacOption){
 
     RobotCommands.ExitTarmacAuto(0.0);
     
-  }else if(m_autoSelected == AutoConstants::FirstOption){
+  }else if(m_autoSelected == AutoConstants::ExitTarmacDelayOption){
 
-    RobotCommands.ExitTarmacAuto(1.0); // Definir o delay
+    RobotCommands.ExitTarmacAuto(AutoConstants::ExitTarmac::delayExitTarmacAuto); // Estamos com delay de 7 segundos
     
-  }else if(m_autoSelected == AutoConstants::SecondOption){
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoOption){
 
     RobotCommands.OneCargoAuto(0.0);
 
-  }else if(m_autoSelected == AutoConstants::ThirdOption){
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoDelayOption){
 
-    RobotCommands.OneCargoAuto(1.0); // Definir o delay
+    RobotCommands.OneCargoAuto(AutoConstants::OneCargoAuto::delayOneCargoAuto); // Estamos com delay de 7 segundos
 
   }
 
@@ -80,7 +84,7 @@ void Robot::DisabledInit() {
 
 void Robot::DisabledPeriodic() {}
 
-void Robot::TestInit() {}
+void Robot::TestInit() { }
 
 void Robot::TestPeriodic() {}
 

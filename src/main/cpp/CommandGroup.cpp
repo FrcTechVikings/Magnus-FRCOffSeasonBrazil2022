@@ -7,7 +7,7 @@ void CommandGroup::InitAutoCommands(){
     RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
     RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
 
-    RobotArm.ArmSwitchUp(); // CUIDADO
+    RobotArm.ArmSwitchUp();
 
     RobotDrivetrain.ResetEncoders();
 
@@ -20,18 +20,18 @@ void CommandGroup::OneCargoAuto(double delaySeconds){
 
     RobotArm.ArmPeriodic(1, 0.0);
 
-    if(autoTimer.Get().value() <= 0.5 + delaySeconds){
+    if(autoTimer.Get().value() <= AutoConstants::OneCargoAuto::robotStartConfigTime + delaySeconds){
 
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.5);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
-    }else if (autoTimer.Get().value() <= 1.7 + delaySeconds){
+    }else if (autoTimer.Get().value() <= AutoConstants::OneCargoAuto::slightlyWalkForwardTime + delaySeconds){
         
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
 
-        if(RobotDrivetrain.GetDistanceEncoder() <= 0.25){
+        if(RobotDrivetrain.GetDistanceEncoder() <= AutoConstants::OneCargoAuto::slightlyWalkForwardDistance){
 
             RobotDrivetrain.m_robotDrive.CurvatureDrive(0.3, 0.0, true);
 
@@ -41,7 +41,7 @@ void CommandGroup::OneCargoAuto(double delaySeconds){
 
         }
 
-    }else if (autoTimer.Get().value() <= 2.9 + delaySeconds){
+    }else if (autoTimer.Get().value() <= AutoConstants::OneCargoAuto::intakeShootTime + delaySeconds){
 
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 1.0);
@@ -49,12 +49,12 @@ void CommandGroup::OneCargoAuto(double delaySeconds){
 
         RobotDrivetrain.ResetEncoders();
 
-    }else if (autoTimer.Get().value() <= 6.4 + delaySeconds){
+    }else if (autoTimer.Get().value() <= AutoConstants::OneCargoAuto::exitingTarmacTime + delaySeconds){
 
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
 
-        if(RobotDrivetrain.GetDistanceEncoder() <= 2.2){
+        if(RobotDrivetrain.GetDistanceEncoder() <= AutoConstants::OneCargoAuto::exitingTarmacDistance){
 
             RobotDrivetrain.m_robotDrive.CurvatureDrive(-0.4, 0.0, true);
 
@@ -72,26 +72,24 @@ void CommandGroup::OneCargoAuto(double delaySeconds){
 
     }
 
-    Log();
-
 }
 
 void CommandGroup::ExitTarmacAuto(double delaySeconds){
 
     RobotArm.ArmPeriodic(1, 0.0);
 
-    if(autoTimer.Get().value() <= 0.5 + delaySeconds){
+    if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::robotStartConfigTime + delaySeconds){
 
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.5);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
-    }else if(autoTimer.Get().value() <= 6.5 + delaySeconds){
+    }else if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::exitingTarmacTime + delaySeconds){
 
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
 
-        if(RobotDrivetrain.GetDistanceEncoder() <= 2.0){
+        if(RobotDrivetrain.GetDistanceEncoder() <= AutoConstants::ExitTarmac::exitingTarmacDistance){
 
             RobotDrivetrain.m_robotDrive.CurvatureDrive(-0.4, 0.0, true);
 

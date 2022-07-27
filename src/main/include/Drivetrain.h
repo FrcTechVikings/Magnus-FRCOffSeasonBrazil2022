@@ -32,7 +32,6 @@ class Drivetrain{
         void ChangeDirection();
         void DrivetrainInit();
         void ResetEncoders();
-        void CheesyDrive(double forward, double turn);
         double GetDistanceEncoder();
 
     private:

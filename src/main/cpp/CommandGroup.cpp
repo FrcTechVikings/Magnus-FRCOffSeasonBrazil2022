@@ -1,5 +1,116 @@
 #include "CommandGroup.h"
 
+void CommandGroup::InitAutoCommands(){
+
+    RobotDrivetrain.frontLeftDriving.SetNeutralMode(NeutralMode::Brake);
+    RobotDrivetrain.rearLeftDriving.SetNeutralMode(NeutralMode::Brake);
+    RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
+    RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
+
+    RobotArm.ArmSwitchUp(); // CUIDADO
+
+    RobotDrivetrain.ResetEncoders();
+
+    autoTimer.Reset();
+    autoTimer.Start();
+
+}
+
+void CommandGroup::OneCargoAuto(double delaySeconds){
+
+    RobotArm.ArmPeriodic(1, 0.0);
+
+    if(autoTimer.Get().value() <= 0.5 + delaySeconds){
+
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.5);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+        RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+    }else if (autoTimer.Get().value() <= 1.7 + delaySeconds){
+        
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+
+        if(RobotDrivetrain.GetDistanceEncoder() <= 0.25){
+
+            RobotDrivetrain.m_robotDrive.CurvatureDrive(0.3, 0.0, true);
+
+        }else{
+
+            RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+        }
+
+    }else if (autoTimer.Get().value() <= 2.9 + delaySeconds){
+
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 1.0);
+        RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+        RobotDrivetrain.ResetEncoders();
+
+    }else if (autoTimer.Get().value() <= 6.4 + delaySeconds){
+
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+
+        if(RobotDrivetrain.GetDistanceEncoder() <= 2.2){
+
+            RobotDrivetrain.m_robotDrive.CurvatureDrive(-0.4, 0.0, true);
+
+        }else{
+
+            RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+        }
+
+    }else{
+
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+        RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+    }
+
+    Log();
+
+}
+
+void CommandGroup::ExitTarmacAuto(double delaySeconds){
+
+    RobotArm.ArmPeriodic(1, 0.0);
+
+    if(autoTimer.Get().value() <= 0.5 + delaySeconds){
+
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.5);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+        RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+    }else if(autoTimer.Get().value() <= 6.5 + delaySeconds){
+
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+
+        if(RobotDrivetrain.GetDistanceEncoder() <= 2.0){
+
+            RobotDrivetrain.m_robotDrive.CurvatureDrive(-0.4, 0.0, true);
+
+        }else{
+
+            RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+        }
+
+    }else{
+
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+        RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+    }
+
+}
+
 void CommandGroup::InitCommands(){
 
     RobotDrivetrain.DrivetrainInit();

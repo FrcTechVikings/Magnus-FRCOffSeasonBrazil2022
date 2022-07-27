@@ -18,6 +18,10 @@ class CommandGroup {
         Intake RobotIntake;
         Arm RobotArm;
 
+        void InitAutoCommands();
+        void OneCargoAuto(double delaySeconds);
+        void ExitTarmacAuto(double delaySeconds);
+
         void InitCommands();
         void PeriodicCommands();
         void PilotCommands();
@@ -27,5 +31,7 @@ class CommandGroup {
     private:
 
         bool safeLock = 1;
+
+        frc::Timer autoTimer;
 
 };

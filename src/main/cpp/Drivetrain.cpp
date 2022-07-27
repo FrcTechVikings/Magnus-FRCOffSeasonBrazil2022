@@ -22,7 +22,6 @@ void Drivetrain::Drive(double yStick, double zStick, bool lock){
     zRotation = zAxis * lock * percentRotation;
 
     m_robotDrive.CurvatureDrive(ySpeed, zRotation, true);
-    //m_robotDrive.ArcadeDrive(ySpeed, zRotation);
     
 }
 

@@ -5,6 +5,7 @@ void Arm::ArmLog(){
     frc::SmartDashboard::PutNumber("Limit switch de cima", topLimitSwitch.Get());
     frc::SmartDashboard::PutNumber("Limit switch de baixo", bottomLimitSwitch.Get());
     frc::SmartDashboard::PutNumber("Estado do Braço", armIsUp);
+    frc::SmartDashboard::PutNumber("ArmDirection", armControlDirection);
     frc::SmartDashboard::PutNumber("OperatorStickValue", operatorStickValue);
 
 }
@@ -17,7 +18,8 @@ void Arm::ArmFeed(bool lock, double percent){
         
     }else{
         
-        operatorStickValue = ArmConstants::armKeepUp * (!bottomLimitSwitch.Get());
+        //operatorStickValue = ArmConstants::armKeepUp * (!bottomLimitSwitch.Get());
+        operatorStickValue = ArmConstants::armKeepUp;
         
     }
 

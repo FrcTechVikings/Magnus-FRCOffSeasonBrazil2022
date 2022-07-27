@@ -13,12 +13,13 @@
  */
 
 #include "Robot.h"
-#include <fmt/core.h>
 
 void Robot::RobotInit() {
 
-  m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
-  m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
+  m_chooser.SetDefaultOption(AutoConstants::DefaultOption, AutoConstants::DefaultOption);
+  m_chooser.AddOption(AutoConstants::FirstOption, AutoConstants::FirstOption);
+  m_chooser.AddOption(AutoConstants::SecondOption, AutoConstants::SecondOption);
+  m_chooser.AddOption(AutoConstants::ThirdOption, AutoConstants::ThirdOption);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
   RobotCommands.InitCommands();
@@ -29,44 +30,30 @@ void Robot::RobotPeriodic() {}
 
 void Robot::AutonomousInit() {
 
-  /*m_autoSelected = m_chooser.GetSelected();
-
-  fmt::print("Auto selected: {}\n", m_autoSelected);
-
-  if (m_autoSelected == kAutoNameCustom) {
-    
-  } else {
-    
-  }*/
-
-  RobotCommands.RobotDrivetrain.frontLeftDriving.SetNeutralMode(NeutralMode::Brake);
-  RobotCommands.RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
-  RobotCommands.RobotDrivetrain.rearLeftDriving.SetNeutralMode(NeutralMode::Brake);
-  RobotCommands.RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
-
-  RobotCommands.RobotDrivetrain.ResetEncoders();
+  m_autoSelected = m_chooser.GetSelected();
+  RobotCommands.InitAutoCommands();
 
 }
 
 void Robot::AutonomousPeriodic() {
 
-  /*if (m_autoSelected == kAutoNameCustom) {
-  
-  } else {
-  
-  }*/
+  if (m_autoSelected == AutoConstants::DefaultOption){
 
-  if(RobotCommands.RobotDrivetrain.GetDistanceEncoder() < 2.0){
+    RobotCommands.ExitTarmacAuto(0.0);
+    
+  }else if(m_autoSelected == AutoConstants::FirstOption){
 
-    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0.5, 0.5);
+    RobotCommands.ExitTarmacAuto(1.0); // Definir o delay
+    
+  }else if(m_autoSelected == AutoConstants::SecondOption){
 
-  }else{
+    RobotCommands.OneCargoAuto(0.0);
 
-    RobotCommands.RobotDrivetrain.m_robotDrive.TankDrive(0, 0);
+  }else if(m_autoSelected == AutoConstants::ThirdOption){
+
+    RobotCommands.OneCargoAuto(1.0); // Definir o delay
 
   }
-
-  RobotCommands.RobotDrivetrain.DrivetrainLog();
 
 }
 
@@ -79,11 +66,8 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 
   RobotCommands.PeriodicCommands();
-
   RobotCommands.PilotCommands();
-
   RobotCommands.OperatorCommands();
-
   RobotCommands.Log();
 
 }

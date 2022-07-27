@@ -1,5 +1,14 @@
 #pragma once
 
+namespace AutoConstants{
+
+    const std::string DefaultOption = "Sair Tarmac";
+    const std::string FirstOption = "Sair Tarmac com delay";
+    const std::string SecondOption = "Uma bola auto";
+    const std::string ThirdOption = "Uma bola auto com delay";
+
+}
+
 namespace DriveTrainConstants {
 
     const double percentGain = 0.1;

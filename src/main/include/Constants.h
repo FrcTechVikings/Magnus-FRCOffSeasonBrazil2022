@@ -69,12 +69,12 @@ namespace IntakeConstants {
 
 namespace ArmConstants {
 
-    const double armPercentConstrain = 0.8;
+    const double armPercentConstrain = 0.6;
     const double armKeepUp = 0.05;
     const double holderPercent = 0.6;
     const double operatorArmDeadBand = 0.5;
-    const double armPercentUp = 0.8;
-    const double armPercentDown = -0.8;
+    const double armPercentUp = 0.6;
+    const double armPercentDown = -0.6;
 
 }
 

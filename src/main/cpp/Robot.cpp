@@ -2,18 +2,6 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-/*                                      ┌────────────────┐
- *                                      │   TO DO LIST   │
- *                                      └────────────────┘ 
- *      ╥
- *      ╠⇒ Deixar a Shuffleboard bonita
- *      ║
- *      ╠⇒ Estratégias usadas para fazer as programações
- *      ║
- *      ╠⇒ Comentar o código e organizar um pouco mais, removendo as inutilidades e valores temporários.
- *      ╨
- */
-
 #include "Robot.h"
 
 void Robot::RobotInit() {

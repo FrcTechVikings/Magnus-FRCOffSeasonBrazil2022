@@ -205,11 +205,15 @@ void CommandGroup::Log(){
     
     // Valores do programador!
 
-    //frc::SmartDashboard::PutNumber("Piloto JoyY", pilotStick.GetY());
-    //frc::SmartDashboard::PutNumber("Piloto JoyZ", pilotStick.GetZ());
-    //frc::SmartDashboard::PutNumber("Operador JoyY", operatorStick.GetY());
+    frc::SmartDashboard::PutNumber("Piloto JoyY", pilotStick.GetY());
+    frc::SmartDashboard::PutNumber("Piloto JoyZ", pilotStick.GetZ());
+    frc::SmartDashboard::PutNumber("Operador JoyY", operatorStick.GetY());
 
-    if(safeLock == 0){frc::SmartDashboard::PutString("SafeLock", "Destravado");}
-    else{frc::SmartDashboard::PutString("SafeLock", "Travado");}
+    frc::SmartDashboard::PutNumber("Delay Autônomo", AutoConstants::OneCargoAuto::delayOneCargoAuto);
+
+    if(safeLock == 1){frc::SmartDashboard::PutBoolean("SafeLock", 1);}
+    else{frc::SmartDashboard::PutBoolean("SafeLock", 0);}
+
+
     
 }

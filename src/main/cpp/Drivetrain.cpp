@@ -5,12 +5,12 @@ void Drivetrain::DrivetrainLog(){
     // Valores do programador!
 
     frc::SmartDashboard::PutNumber("Nível de Velocidade", percentSpeed * 10);
-    //frc::SmartDashboard::PutNumber("ySpeed", ySpeed);
-    //frc::SmartDashboard::PutNumber("zRotation", zRotation);
+    frc::SmartDashboard::PutNumber("ySpeed", ySpeed);
+    frc::SmartDashboard::PutNumber("zRotation", zRotation);
 
-    //frc::SmartDashboard::PutNumber("Encoder esquerdo metros", leftDriveEncoder.GetDistance());
-    //frc::SmartDashboard::PutNumber("Encoder direito metros", rightDriveEconder.GetDistance());
-    //frc::SmartDashboard::PutNumber("Média dos encoders", GetDistanceEncoder());
+    frc::SmartDashboard::PutNumber("Encoder esquerdo metros", leftDriveEncoder.GetDistance());
+    frc::SmartDashboard::PutNumber("Encoder direito metros", rightDriveEconder.GetDistance());
+    frc::SmartDashboard::PutNumber("Média dos encoders", GetDistanceEncoder());
 
 }
 

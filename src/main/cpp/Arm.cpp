@@ -4,10 +4,10 @@ void Arm::ArmLog(){
 
     // Valores do programador!
 
-    //frc::SmartDashboard::PutNumber("Limit switch de cima", topLimitSwitch.Get());
-    //frc::SmartDashboard::PutNumber("Limit switch de baixo", bottomLimitSwitch.Get());
-    //frc::SmartDashboard::PutNumber("ArmDirection", armControlDirection);
-    //frc::SmartDashboard::PutNumber("OperatorStickValue", operatorStickValue);
+    frc::SmartDashboard::PutNumber("Limit switch de cima", topLimitSwitch.Get());
+    frc::SmartDashboard::PutNumber("Limit switch de baixo", bottomLimitSwitch.Get());
+    frc::SmartDashboard::PutNumber("ArmDirection", armControlDirection);
+    frc::SmartDashboard::PutNumber("OperatorStickValue", operatorStickValue);
 
 }
 

@@ -2,23 +2,25 @@
 
 void Arm::ArmLog(){
 
-    frc::SmartDashboard::PutNumber("Limit switch de cima", topLimitSwitch.Get());
-    frc::SmartDashboard::PutNumber("Limit switch de baixo", bottomLimitSwitch.Get());
-    frc::SmartDashboard::PutNumber("Estado do Braço", armIsUp);
-    frc::SmartDashboard::PutNumber("ArmDirection", armControlDirection);
-    frc::SmartDashboard::PutNumber("OperatorStickValue", operatorStickValue);
+    // Valores do programador!
+
+    //frc::SmartDashboard::PutNumber("Limit switch de cima", topLimitSwitch.Get());
+    //frc::SmartDashboard::PutNumber("Limit switch de baixo", bottomLimitSwitch.Get());
+    //frc::SmartDashboard::PutNumber("ArmDirection", armControlDirection);
+    //frc::SmartDashboard::PutNumber("OperatorStickValue", operatorStickValue);
 
 }
 
 void Arm::ArmFeed(bool lock, double percent){
 
+    // Controle do braço pelo joystick -> DeadBand
     if(percent > ArmConstants::operatorArmDeadBand || percent < -1 * ArmConstants::operatorArmDeadBand){
         
-        operatorStickValue = -1 * percent * lock * ArmConstants::armPercentMax;
+        operatorStickValue = -1 * percent * lock * ArmConstants::armPercentConstrain;
         
     }else{
         
-        //operatorStickValue = ArmConstants::armKeepUp * (!bottomLimitSwitch.Get());
+        //operatorStickValue = ArmConstants::armKeepUp * (!bottomLimitSwitch.Get()); // ---> Relaxar o motor de acordo com o microswitch
         operatorStickValue = ArmConstants::armKeepUp;
         
     }
@@ -62,13 +64,6 @@ void Arm::ArmSwitchDown(){
 
 }
 
-void Arm::ArmState(){
-
-    if(topLimitSwitch.Get() == true && armIsUp == false){armIsUp = true;}
-    else if(bottomLimitSwitch.Get() == true && armIsUp == true){armIsUp = false;}
-
-}
-
 void Arm::ArmPeriodic(bool lock, double JoyStickY){
 
     if(armControlDirection == 1){
@@ -90,7 +85,5 @@ void Arm::ArmPeriodic(bool lock, double JoyStickY){
     }
 
     if(lock == 0){armControlDirection = 0;}
-
-    ArmState();
 
 }

@@ -2,17 +2,21 @@
 
 void Drivetrain::DrivetrainLog(){
 
-    frc::SmartDashboard::PutNumber("Nível de Velocidade", percentSpeed * 10);
-    frc::SmartDashboard::PutNumber("ySpeed", ySpeed);
-    frc::SmartDashboard::PutNumber("zRotation", zRotation);
+    // Valores do programador!
 
-    frc::SmartDashboard::PutNumber("Encoder esquerdo metros", leftDriveEncoder.GetDistance());
-    frc::SmartDashboard::PutNumber("Encoder direito metros", rightDriveEconder.GetDistance());
-    frc::SmartDashboard::PutNumber("Média dos encoders", GetDistanceEncoder());
+    frc::SmartDashboard::PutNumber("Nível de Velocidade", percentSpeed * 10);
+    //frc::SmartDashboard::PutNumber("ySpeed", ySpeed);
+    //frc::SmartDashboard::PutNumber("zRotation", zRotation);
+
+    //frc::SmartDashboard::PutNumber("Encoder esquerdo metros", leftDriveEncoder.GetDistance());
+    //frc::SmartDashboard::PutNumber("Encoder direito metros", rightDriveEconder.GetDistance());
+    //frc::SmartDashboard::PutNumber("Média dos encoders", GetDistanceEncoder());
 
 }
 
 void Drivetrain::Drive(double yStick, double zStick, bool lock){
+
+    // Está sem o DeadBand
 
     yAxis = (0.5 * pow(yStick, 3) + (0.5 * yStick));
     zAxis = zStick;
@@ -65,6 +69,8 @@ void Drivetrain::ChangeDirection(){
 
 void Drivetrain::DrivetrainInit(){
 
+    // Metade dos motores no Brake e a outra metade em Coast
+
     rearLeftDriving.SetNeutralMode(NeutralMode::Brake);
     rearRightDriving.SetNeutralMode(NeutralMode::Brake);
     frontLeftDriving.SetNeutralMode(NeutralMode::Coast);
@@ -75,6 +81,7 @@ void Drivetrain::DrivetrainInit(){
     leftDriveEncoder.SetDistancePerPulse(RobotConstants::wheelLenghtMeters/2048.0); // In meters
     rightDriveEconder.SetDistancePerPulse(RobotConstants::wheelLenghtMeters/2048.0); // In meters
 
+    // Segurança dos motores
     m_robotDrive.SetSafetyEnabled(true);
     m_robotDrive.SetExpiration(100_ms);
 
@@ -102,7 +109,7 @@ double Drivetrain::GetDistanceEncoder(){
     double right = rightDriveEconder.GetDistance();
 
     if(left < 0) left *= -1;
-    if(right <0) right *= -1;
+    if(right < 0) right *= -1;
 
     return ((left + right)/2);
 

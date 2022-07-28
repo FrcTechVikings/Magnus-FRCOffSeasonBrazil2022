@@ -21,18 +21,19 @@ class Drivetrain{
 
         frc::DifferentialDrive m_robotDrive{motorsLeft, motorsRight};
 
+        // Declaração dos encoders do Drivetrain
         frc::Encoder leftDriveEncoder {SensorsConstants::leftDriveEncoderAChannel, SensorsConstants::leftDriveEncoderBChannel};
         frc::Encoder rightDriveEconder {SensorsConstants::rightDriveEncoderAChannel, SensorsConstants::rightDriveEncoderBChannel, true};
 
-        void DrivetrainLog();
-        void Drive(double yAxis, double zAxis, bool lock);
-        void ChangeSpeed(int proportion, double gain);
-        void ChangeToMaxSpeed();
-        void ChangeToStandardSpeed();
-        void ChangeDirection();
-        void DrivetrainInit();
-        void ResetEncoders();
-        double GetDistanceEncoder();
+        void DrivetrainLog(); // Registro de valores do Drivetrain
+        void Drive(double yAxis, double zAxis, bool lock); // Método de Drive do robô. Ps: Curvature/Cheesy drive
+        void ChangeSpeed(int proportion, double gain); // Modifica a porcentagem de uso dos motores do Drivetrain
+        void ChangeToMaxSpeed(); // Altera para o uso máximo estabelecido do Drivetrain
+        void ChangeToStandardSpeed(); // Altera para o uso padrão estabelecido do Drivetrain
+        void ChangeDirection(); // Altera a direção dos motores do Drivetrain
+        void DrivetrainInit(); // Inicializa o Drivetrain
+        void ResetEncoders(); // Reseta os encoders
+        double GetDistanceEncoder(); // Retorna a média da distância lida pelos encoders -> Movimentação linear
 
     private:
 

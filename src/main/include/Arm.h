@@ -4,7 +4,6 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "Constants.h"
 #include <frc/DigitalInput.h>
-#include <string.h>
 
 class Arm {
 
@@ -13,19 +12,17 @@ class Arm {
         WPI_VictorSPX armMotor = {MotorsConstants::armRedline};
         WPI_VictorSPX armHolder = {MotorsConstants::armSnowBlower};
 
+        // Microswitches para o controle do braço
         frc::DigitalInput topLimitSwitch {SensorsConstants::topMicroSwitchDIO};
         frc::DigitalInput bottomLimitSwitch {SensorsConstants::bottomMicroSwitchDIO};
 
-        bool armIsUp = true;
-
-        void ArmLog();
-        void ArmFeed(bool lock, double percent);
-        void ArmHolderFeed(bool lock, int direction);
-        void ArmSwitchUp();
-        void ArmSwitchDown();
-        void ArmState();
-        void ArmInit();
-        void ArmPeriodic(bool lock, double joyStickY);
+        void ArmLog(); // Registro do Braço
+        void ArmFeed(bool lock, double percent); // Alimentação do motor do Braço
+        void ArmHolderFeed(bool lock, int direction); // Alimentação do Snow Blower
+        void ArmSwitchUp(); // Comando para executar a subida automática do Braço
+        void ArmSwitchDown(); // Comando para executar a descida automática do Braço
+        void ArmInit(); // Inicializa o Braço
+        void ArmPeriodic(bool lock, double joyStickY); // Realiza a checagem periódica do controle do Braço e executa o movimento
 
     private:
 

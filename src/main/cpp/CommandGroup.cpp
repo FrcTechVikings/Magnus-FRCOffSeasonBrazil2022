@@ -7,6 +7,7 @@ void CommandGroup::InitAutoCommands(){
     RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
     RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
 
+    // Levanta o braço do robô no início do autônomo
     RobotArm.ArmSwitchUp();
 
     RobotDrivetrain.ResetEncoders();
@@ -14,20 +15,31 @@ void CommandGroup::InitAutoCommands(){
     autoTimer.Reset();
     autoTimer.Start();
 
+    executeOnce = 0;
+
 }
 
-void CommandGroup::OneCargoAuto(double delaySeconds){
+void CommandGroup::OneCargoAuto(double delaySeconds, bool armDown){
 
     RobotArm.ArmPeriodic(1, 0.0);
 
-    if(autoTimer.Get().value() <= AutoConstants::OneCargoAuto::robotStartConfigTime + delaySeconds){
+    if(autoTimer.Get().value() <= AutoConstants::OneCargoAuto::robotStartConfigTime){
 
+        // Levanta o braço e solta a trava de segurança
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.5);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+        RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
+    }else if(autoTimer.Get().value() <= AutoConstants::OneCargoAuto::robotStartConfigTime + delaySeconds){
+
+        // Método de espera, caso delaySeconds seja maior que 0
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
     }else if (autoTimer.Get().value() <= AutoConstants::OneCargoAuto::slightlyWalkForwardTime + delaySeconds){
         
+        // Movimentação suave para frente (a fim de se aproximar do hub)
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
 
@@ -43,6 +55,7 @@ void CommandGroup::OneCargoAuto(double delaySeconds){
 
     }else if (autoTimer.Get().value() <= AutoConstants::OneCargoAuto::intakeShootTime + delaySeconds){
 
+        // Aciona o intake para a liberação da cargo inicial
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 1.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
@@ -50,6 +63,14 @@ void CommandGroup::OneCargoAuto(double delaySeconds){
         RobotDrivetrain.ResetEncoders();
 
     }else if (autoTimer.Get().value() <= AutoConstants::OneCargoAuto::exitingTarmacTime + delaySeconds){
+
+        // Sai do tarmac e - se necessário - abaixa o braço
+        if(armDown == true && executeOnce == 0){
+
+            RobotArm.ArmSwitchDown();
+            executeOnce = 1;
+
+        }
 
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
@@ -65,7 +86,8 @@ void CommandGroup::OneCargoAuto(double delaySeconds){
         }
 
     }else{
-
+        
+        // Espera o autônomo acabar
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
@@ -74,17 +96,33 @@ void CommandGroup::OneCargoAuto(double delaySeconds){
 
 }
 
-void CommandGroup::ExitTarmacAuto(double delaySeconds){
+void CommandGroup::ExitTarmacAuto(double delaySeconds, bool armDown){
 
     RobotArm.ArmPeriodic(1, 0.0);
 
-    if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::robotStartConfigTime + delaySeconds){
+    if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::robotStartConfigTime){
 
+        // Levanta o braço e solta a trava de segurança
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.5);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
+    }else if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::robotStartConfigTime + delaySeconds){
+
+        // Método de espera, caso delaySeconds seja maior que 0
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
+        RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
+        RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
+
     }else if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::exitingTarmacTime + delaySeconds){
+
+        // Sai do tarmac e - se necessário - abaixa o braço
+        if(armDown == true && executeOnce == 0){
+
+            RobotArm.ArmSwitchDown();
+            executeOnce = 1;
+
+        }
 
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
@@ -101,6 +139,7 @@ void CommandGroup::ExitTarmacAuto(double delaySeconds){
 
     }else{
 
+        // Espera o autônomo acabar
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
@@ -111,6 +150,7 @@ void CommandGroup::ExitTarmacAuto(double delaySeconds){
 
 void CommandGroup::InitCommands(){
 
+    // Inicializa todos os sistemas e reseta variáveis
     RobotDrivetrain.DrivetrainInit();
     RobotIntake.IntakeInit();
     RobotArm.ArmInit();
@@ -128,6 +168,8 @@ void CommandGroup::PeriodicCommands(){
 
 void CommandGroup::PilotCommands(){
 
+    // Comandos do Piloto
+
     if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonBACK)){safeLock = !safeLock;}
     if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonRB)){RobotDrivetrain.ChangeSpeed(1, DriveTrainConstants::percentGain);}
     if(pilotStick.GetRawButtonPressed(JoystickConstants::buttonLB)){RobotDrivetrain.ChangeSpeed(-1, DriveTrainConstants::percentGain);}
@@ -139,9 +181,11 @@ void CommandGroup::PilotCommands(){
 
 void CommandGroup::OperatorCommands(){
 
+    // Comandos do Operador
+
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonBACK)){safeLock = !safeLock;}
     if(operatorStick.GetRawButton(JoystickConstants::buttonX)) {RobotIntake.IntakeFeed(safeLock, 1, RobotIntake.ReleasePercent);}
-    else if(operatorStick.GetRawButton(JoystickConstants::buttonB)) {RobotIntake.IntakeFeed(safeLock, -1, IntakeConstants::percentIntakeStandardCollect);}
+    else if(operatorStick.GetRawButton(JoystickConstants::buttonB)) {RobotIntake.IntakeFeed(safeLock, -1, IntakeConstants::percentIntakeCollect);}
     else {RobotIntake.IntakeFeed(safeLock, 0.0, 0.0);}
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonRB)){RobotIntake.IntakeChangeSpeed(1);}
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonLB)){RobotIntake.IntakeChangeSpeed(-1);}
@@ -159,9 +203,13 @@ void CommandGroup::Log(){
     RobotIntake.IntakeLog();
     RobotArm.ArmLog();
     
-    frc::SmartDashboard::PutNumber("Piloto JoyY", pilotStick.GetY());
-    frc::SmartDashboard::PutNumber("Piloto JoyZ", pilotStick.GetZ());
-    frc::SmartDashboard::PutNumber("Operador JoyY", operatorStick.GetY());
-    frc::SmartDashboard::PutNumber("SafeLock", safeLock);
+    // Valores do programador!
+
+    //frc::SmartDashboard::PutNumber("Piloto JoyY", pilotStick.GetY());
+    //frc::SmartDashboard::PutNumber("Piloto JoyZ", pilotStick.GetZ());
+    //frc::SmartDashboard::PutNumber("Operador JoyY", operatorStick.GetY());
+
+    if(safeLock == 0){frc::SmartDashboard::PutString("SafeLock", "Destravado");}
+    else{frc::SmartDashboard::PutString("SafeLock", "Travado");}
     
 }

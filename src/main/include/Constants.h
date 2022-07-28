@@ -4,17 +4,21 @@ namespace AutoConstants{
 
     const std::string ExitTarmacOption = "Sair Tarmac";
     const std::string ExitTarmacDelayOption = "Sair Tarmac Com Delay";
+    const std::string ExitTarmacArmDownOption = "Sair Tarmac Braço Abaixado";
+    const std::string ExitTarmacArmDownDelayOption = "Sair Tarmac Braço Abaixado e Delay";
     const std::string OneCargoAutoOption = "Uma Cargo";
     const std::string OneCargoAutoDelayOption = "Uma Cargo Com Delay";
+    const std::string OneCargoAutoArmDownOption = "Uma Cargo Braço Abaixado";
+    const std::string OneCargoAutoArmDownDelayOption = "Uma Cargo Braço Abaixado e Delay";
 
     namespace OneCargoAuto{
 
         const double delayOneCargoAuto = 7.0; // Seconds ////////// Definir ainda!
 
-        const double robotStartConfigTime = 0.5; // Seconds
-        const double slightlyWalkForwardTime = 1.7; // Seconds
-        const double intakeShootTime = 2.9; // Seconds
-        const double exitingTarmacTime = 6.4; // Seconds
+        const double robotStartConfigTime = 0.4; // Seconds
+        const double slightlyWalkForwardTime = 1.6; // Seconds
+        const double intakeShootTime = 2.8; // Seconds
+        const double exitingTarmacTime = 6.3; // Seconds
 
         const double slightlyWalkForwardDistance = 0.25; // Meters
         const double exitingTarmacDistance = 2.2; // Meters
@@ -25,8 +29,8 @@ namespace AutoConstants{
 
         const double delayExitTarmacAuto = 7.0; // Seconds ////////// Definir ainda!
 
-        const double robotStartConfigTime = 0.5; // Seconds
-        const double exitingTarmacTime = 6.5; // Seconds
+        const double robotStartConfigTime = 0.4; // Seconds
+        const double exitingTarmacTime = 6.4; // Seconds
 
         const double exitingTarmacDistance = 2.0; // Meters
 
@@ -55,7 +59,7 @@ namespace RobotConstants {
 
 namespace IntakeConstants {
 
-    const double percentIntakeStandardCollect = 1.0;
+    const double percentIntakeCollect = 1.0;
     const double percentIntakeStandardRelease = 0.7;
     const double maxPercentIntakeRelease = 1.0;
     const double minPercentIntakeRelease = 0.5;
@@ -65,11 +69,11 @@ namespace IntakeConstants {
 
 namespace ArmConstants {
 
-    const double armPercentMax = 0.8;
+    const double armPercentConstrain = 0.8;
     const double armKeepUp = 0.05;
     const double holderPercent = 0.6;
     const double operatorArmDeadBand = 0.5;
-    const double armPercentUp = 0.9;
+    const double armPercentUp = 0.8;
     const double armPercentDown = -0.8;
 
 }
@@ -99,8 +103,10 @@ namespace SensorsConstants {
 
 namespace JoystickConstants {
 
-    const double yStickBand = 0.1;
-    const double zStickBand = 0.0;
+    // Removido por agora
+
+    //const double yStickBand = 0.1;
+    //const double zStickBand = 0.0;
 
     const int buttonX = 1;
     const int buttonA = 2;

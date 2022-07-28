@@ -12,10 +12,10 @@ class Intake {
 
         double ReleasePercent = IntakeConstants::percentIntakeStandardRelease;
 
-        void IntakeLog();
-        void IntakeFeed(bool lock, int direction, double velocity);
-        void IntakeInit();
-        void IntakeChangeSpeed(int proportion);
+        void IntakeLog(); // Registro do Intake
+        void IntakeFeed(bool lock, int direction, double velocity); // Alimentação do Intake
+        void IntakeInit(); // Inicialização do Intake
+        void IntakeChangeSpeed(int proportion); // Modificar a velocidade do Intake
     
     private:
 

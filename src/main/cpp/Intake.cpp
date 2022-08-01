@@ -8,7 +8,8 @@ void Intake::IntakeLog(){
 
 void Intake::IntakeFeed(bool lock, int direction, double velocity){
 
-    intakeMotor.Set(ControlMode::PercentOutput, lock * velocity * direction);
+    //intakeMotor.Set(ControlMode::PercentOutput, lock * velocity * direction);
+    intakeMotor.SetVoltage(units::volt_t(12.0) * lock * velocity * direction);
 
 }
 

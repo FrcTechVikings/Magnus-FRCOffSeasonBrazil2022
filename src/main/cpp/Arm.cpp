@@ -31,7 +31,7 @@ void Arm::ArmFeed(bool lock, double percent){
 
 void Arm::ArmHolderFeed(bool lock, int direction){
 
-    armHolder.Set(ControlMode::PercentOutput, ArmConstants::holderPercent * direction * lock * -1);
+    armHolder.Set(ControlMode::PercentOutput, ArmConstants::holderPercent * direction * lock);
 
 }
 

@@ -1,7 +1,6 @@
 #pragma once
 
 // O objetivo dessa classe é juntar os sistemas, para o teleoperado e autônomo
-
 #include <frc/Joystick.h>
 #include "Constants.h"
 
@@ -23,8 +22,8 @@ class CommandGroup {
         Arm RobotArm;
 
         void InitAutoCommands(); // Inicialização do autônomo do robô
-        void OneCargoAuto(double delaySeconds, bool armDown); // Método autônomo de pontuar uma cargo
-        void ExitTarmacAuto(double delaySeconds, bool armDown); // Metódo autônomo de apenas sair do tarmac
+        void OneCargoAuto(double delaySeconds, double dist); // Método autônomo de pontuar uma cargo
+        void ExitTarmacAuto(double delaySeconds); // Metódo autônomo de apenas sair do tarmac
 
         void InitCommands(); // Inicialização dos comandos teleoperados do robô
         void PeriodicCommands(); // Comandos periódicos do teleoperado

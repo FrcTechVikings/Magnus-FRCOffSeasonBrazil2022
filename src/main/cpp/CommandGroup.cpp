@@ -19,14 +19,14 @@ void CommandGroup::InitAutoCommands(){
 
 }
 
-void CommandGroup::OneCargoAuto(double delaySeconds, bool armDown){
+void CommandGroup::OneCargoAuto(double delaySeconds, double dist){
 
     RobotArm.ArmPeriodic(1, 0.0);
 
     if(autoTimer.Get().value() <= AutoConstants::OneCargoAuto::robotStartConfigTime){
 
         // Levanta o braço e solta a trava de segurança
-        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.5);
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, -0.2);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
@@ -43,7 +43,7 @@ void CommandGroup::OneCargoAuto(double delaySeconds, bool armDown){
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
 
-        if(RobotDrivetrain.GetDistanceEncoder() <= AutoConstants::OneCargoAuto::slightlyWalkForwardDistance){
+        if(RobotDrivetrain.GetDistanceEncoder() <= dist){
 
             RobotDrivetrain.m_robotDrive.CurvatureDrive(0.3, 0.0, true);
 
@@ -65,7 +65,7 @@ void CommandGroup::OneCargoAuto(double delaySeconds, bool armDown){
     }else if (autoTimer.Get().value() <= AutoConstants::OneCargoAuto::exitingTarmacTime + delaySeconds){
 
         // Sai do tarmac e - se necessário - abaixa o braço
-        if(armDown == true && executeOnce == 0){
+        if(executeOnce == 0){
 
             RobotArm.ArmSwitchDown();
             executeOnce = 1;
@@ -96,14 +96,14 @@ void CommandGroup::OneCargoAuto(double delaySeconds, bool armDown){
 
 }
 
-void CommandGroup::ExitTarmacAuto(double delaySeconds, bool armDown){
+void CommandGroup::ExitTarmacAuto(double delaySeconds){
 
     RobotArm.ArmPeriodic(1, 0.0);
 
     if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::robotStartConfigTime){
 
         // Levanta o braço e solta a trava de segurança
-        RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.5);
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, -0.2);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
@@ -117,7 +117,7 @@ void CommandGroup::ExitTarmacAuto(double delaySeconds, bool armDown){
     }else if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::exitingTarmacTime + delaySeconds){
 
         // Sai do tarmac e - se necessário - abaixa o braço
-        if(armDown == true && executeOnce == 0){
+        if(executeOnce == 0){
 
             RobotArm.ArmSwitchDown();
             executeOnce = 1;

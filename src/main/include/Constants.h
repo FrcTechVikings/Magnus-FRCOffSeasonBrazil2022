@@ -4,12 +4,10 @@ namespace AutoConstants{
 
     const std::string ExitTarmacOption = "Sair Tarmac";
     const std::string ExitTarmacDelayOption = "Sair Tarmac Com Delay";
-    const std::string ExitTarmacArmDownOption = "Sair Tarmac Braço Abaixado";
-    const std::string ExitTarmacArmDownDelayOption = "Sair Tarmac Braço Abaixado e Delay";
     const std::string OneCargoAutoOption = "Uma Cargo";
+    const std::string OneCargoAutoWalkOption = "Uma Cargo com Movimentação";
     const std::string OneCargoAutoDelayOption = "Uma Cargo Com Delay";
-    const std::string OneCargoAutoArmDownOption = "Uma Cargo Braço Abaixado";
-    const std::string OneCargoAutoArmDownDelayOption = "Uma Cargo Braço Abaixado e Delay";
+    const std::string OneCargoAutoDelayWalkOption = "Uma Cargo com Delay e Movimentação";
 
     namespace OneCargoAuto{
 
@@ -20,7 +18,7 @@ namespace AutoConstants{
         const double intakeShootTime = 2.8; // Seconds
         const double exitingTarmacTime = 6.3; // Seconds
 
-        const double slightlyWalkForwardDistance = 0.25; // Meters
+        const double slightlyWalkForwardDistance = 0.35; // Meters
         const double exitingTarmacDistance = 2.2; // Meters
 
     }
@@ -71,10 +69,10 @@ namespace ArmConstants {
 
     const double armPercentConstrain = 0.6;
     const double armKeepUp = 0.05;
-    const double holderPercent = 0.6;
+    const double holderPercent = 0.4;
     const double operatorArmDeadBand = 0.5;
     const double armPercentUp = 0.6;
-    const double armPercentDown = -0.6;
+    const double armPercentDown = -0.5;
 
 }
 

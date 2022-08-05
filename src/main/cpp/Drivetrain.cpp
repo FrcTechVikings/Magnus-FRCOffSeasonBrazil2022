@@ -4,7 +4,7 @@ void Drivetrain::DrivetrainLog(){
 
     // Valores do programador!
 
-    frc::SmartDashboard::PutNumber("Nível de Velocidade", percentSpeed * 10);
+    frc::SmartDashboard::PutNumber("Nível de Velocidade", round(percentSpeed * 10));
     frc::SmartDashboard::PutNumber("ySpeed", ySpeed);
     frc::SmartDashboard::PutNumber("zRotation", zRotation);
 

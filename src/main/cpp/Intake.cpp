@@ -2,14 +2,14 @@
 
 void Intake::IntakeLog(){
 
-    frc::SmartDashboard::PutNumber("Nível Intake", ReleasePercent * 10);
+    frc::SmartDashboard::PutNumber("Nível Intake", round(ReleasePercent * 10));
 
 }
 
 void Intake::IntakeFeed(bool lock, int direction, double velocity){
 
-    //intakeMotor.Set(ControlMode::PercentOutput, lock * velocity * direction);
-    intakeMotor.SetVoltage(units::volt_t(12.0) * lock * velocity * direction);
+    intakeMotor.Set(ControlMode::PercentOutput, lock * velocity * direction);
+    //intakeMotor.SetVoltage(units::volt_t(12.0) * lock * velocity * direction);
 
 }
 

@@ -19,7 +19,7 @@ namespace AutoConstants{
         const double exitingTarmacTime = 6.3; // Seconds
 
         const double slightlyWalkForwardDistance = 0.35; // Meters
-        const double exitingTarmacDistance = 2.2; // Meters
+        const double exitingTarmacDistance = 2.0; // Meters
 
     }
 

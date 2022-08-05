@@ -22,7 +22,7 @@ class CommandGroup {
         Arm RobotArm;
 
         void InitAutoCommands(); // Inicialização do autônomo do robô
-        void OneCargoAuto(double delaySeconds, double dist); // Método autônomo de pontuar uma cargo
+        void OneCargoAuto(double delaySeconds, double dist, double tarmacExitDist); // Método autônomo de pontuar uma cargo
         void ExitTarmacAuto(double delaySeconds); // Metódo autônomo de apenas sair do tarmac
 
         void InitCommands(); // Inicialização dos comandos teleoperados do robô

@@ -19,7 +19,7 @@ void CommandGroup::InitAutoCommands(){
 
 }
 
-void CommandGroup::OneCargoAuto(double delaySeconds, double dist){
+void CommandGroup::OneCargoAuto(double delaySeconds, double dist, double tarmacExitDist){
 
     RobotArm.ArmPeriodic(1, 0.0);
 
@@ -59,12 +59,11 @@ void CommandGroup::OneCargoAuto(double delaySeconds, double dist){
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 1.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
-
         RobotDrivetrain.ResetEncoders();
 
     }else if (autoTimer.Get().value() <= AutoConstants::OneCargoAuto::exitingTarmacTime + delaySeconds){
 
-        // Sai do tarmac e - se necessário - abaixa o braço
+        // Sai do tarmac e abaixa o braço
         if(executeOnce == 0){
 
             RobotArm.ArmSwitchDown();
@@ -75,7 +74,7 @@ void CommandGroup::OneCargoAuto(double delaySeconds, double dist){
         RobotArm.armHolder.Set(ControlMode::PercentOutput, 0.0);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
 
-        if(RobotDrivetrain.GetDistanceEncoder() <= AutoConstants::OneCargoAuto::exitingTarmacDistance){
+        if(RobotDrivetrain.GetDistanceEncoder() <= tarmacExitDist){
 
             RobotDrivetrain.m_robotDrive.CurvatureDrive(-0.4, 0.0, true);
 
@@ -116,7 +115,7 @@ void CommandGroup::ExitTarmacAuto(double delaySeconds){
 
     }else if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::exitingTarmacTime + delaySeconds){
 
-        // Sai do tarmac e - se necessário - abaixa o braço
+        // Sai do tarmac e abaixa o braço
         if(executeOnce == 0){
 
             RobotArm.ArmSwitchDown();

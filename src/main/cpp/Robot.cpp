@@ -11,8 +11,11 @@ void Robot::RobotInit() {
   m_chooser.AddOption(AutoConstants::ExitTarmacDelayOption, AutoConstants::ExitTarmacDelayOption);
   m_chooser.AddOption(AutoConstants::ExitTarmacOption, AutoConstants::ExitTarmacOption);
   m_chooser.AddOption(AutoConstants::OneCargoAutoDelayOption, AutoConstants::OneCargoAutoDelayOption);
-  m_chooser.AddOption(AutoConstants::OneCargoAutoOption, AutoConstants::OneCargoAutoOption);
   m_chooser.AddOption(AutoConstants::OneCargoAutoDelayWalkOption, AutoConstants::OneCargoAutoDelayWalkOption);
+
+  m_chooser.AddOption(AutoConstants::OneCargoAutoOption, AutoConstants::OneCargoAutoOption);
+  m_chooser.AddOption(AutoConstants::OneCargoAutoMoreOption, AutoConstants::OneCargoAutoMoreOption);
+  m_chooser.AddOption(AutoConstants::OneCargoAutoLessOption, AutoConstants::OneCargoAutoLessOption);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -37,10 +40,13 @@ void Robot::AutonomousPeriodic() {
   // Executa o autônomo relacionado ao valor escolhido na driver station
   if (m_autoSelected == AutoConstants::ExitTarmacOption){RobotCommands.ExitTarmacAuto(0.0);
   }else if(m_autoSelected == AutoConstants::ExitTarmacDelayOption){RobotCommands.ExitTarmacAuto(AutoConstants::ExitTarmac::delayExitTarmacAuto); // Estamos com delay de 7 segundos 
-  }else if(m_autoSelected == AutoConstants::OneCargoAutoOption){RobotCommands.OneCargoAuto(0.0, 0.0);
-  }else if(m_autoSelected == AutoConstants::OneCargoAutoDelayOption){RobotCommands.OneCargoAuto(AutoConstants::OneCargoAuto::delayOneCargoAuto, 0.0); // Estamos com delay de 7 segundos
-  }else if(m_autoSelected == AutoConstants::OneCargoAutoWalkOption){RobotCommands.OneCargoAuto(0.0, AutoConstants::OneCargoAuto::slightlyWalkForwardDistance);
-  }else if(m_autoSelected == AutoConstants::OneCargoAutoDelayWalkOption){RobotCommands.OneCargoAuto(AutoConstants::OneCargoAuto::delayOneCargoAuto, AutoConstants::OneCargoAuto::slightlyWalkForwardDistance);} // Estamos com delay de 7 segundos
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoDelayOption){RobotCommands.OneCargoAuto(AutoConstants::OneCargoAuto::delayOneCargoAuto, 0.0, AutoConstants::OneCargoAuto::exitingTarmacDistance); // Estamos com delay de 7 segundos
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoWalkOption){RobotCommands.OneCargoAuto(0.0, AutoConstants::OneCargoAuto::slightlyWalkForwardDistance, AutoConstants::OneCargoAuto::exitingTarmacDistance);
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoDelayWalkOption){RobotCommands.OneCargoAuto(AutoConstants::OneCargoAuto::delayOneCargoAuto, AutoConstants::OneCargoAuto::slightlyWalkForwardDistance, AutoConstants::OneCargoAuto::exitingTarmacDistance); // Estamos com delay de 7 segundos
+
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoOption){RobotCommands.OneCargoAuto(0.0, 0.0, AutoConstants::OneCargoAuto::exitingTarmacDistance);
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoMoreOption){RobotCommands.OneCargoAuto(0.0, 0.0, AutoConstants::OneCargoAuto::exitingTarmacDistanceMore);
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoLessOption){RobotCommands.OneCargoAuto(0.0, 0.0, AutoConstants::OneCargoAuto::exitingTarmacDistanceLess);}
 
 }
 

@@ -2,12 +2,15 @@
 
 namespace AutoConstants{
 
-    const std::string ExitTarmacOption = "Sair Tarmac";
-    const std::string ExitTarmacDelayOption = "Sair Tarmac Com Delay";
-    const std::string OneCargoAutoOption = "Uma Cargo";
-    const std::string OneCargoAutoWalkOption = "Uma Cargo com Movimentação";
-    const std::string OneCargoAutoDelayOption = "Uma Cargo Com Delay";
-    const std::string OneCargoAutoDelayWalkOption = "Uma Cargo com Delay e Movimentação";
+    const std::string ExitTarmacOption = "Sair Tarmac 2 metros";
+    const std::string ExitTarmacDelayOption = "Sair Tarmac Com Delay 2 metros";
+    const std::string OneCargoAutoDelayOption = "Uma Cargo Com Delay e 2 metros";
+    const std::string OneCargoAutoDelayWalkOption = "Uma Cargo com Delay, Movimentação e 2 metros";
+    const std::string OneCargoAutoWalkOption = "Uma Cargo com Movimentação e 2 metros";
+
+    const std::string OneCargoAutoOption = "Uma Cargo e 2 metros - NOVO";
+    const std::string OneCargoAutoMoreOption = "Uma Cargo e 2.2 metros - NOVO";
+    const std::string OneCargoAutoLessOption = "Uma Cargo e 1.8 metros - NOVO";
 
     namespace OneCargoAuto{
 
@@ -20,6 +23,8 @@ namespace AutoConstants{
 
         const double slightlyWalkForwardDistance = 0.35; // Meters
         const double exitingTarmacDistance = 2.0; // Meters
+        const double exitingTarmacDistanceMore = 2.2;
+        const double exitingTarmacDistanceLess = 1.8;
 
     }
 

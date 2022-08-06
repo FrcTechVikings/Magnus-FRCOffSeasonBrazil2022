@@ -7,6 +7,8 @@ void CommandGroup::InitAutoCommands(){
     RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
     RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
 
+    frc::SmartDashboard::PutNumber("distanciaVariavel", 2.0);
+
     // Levanta o braço do robô no início do autônomo
     RobotArm.ArmSwitchUp();
 
@@ -183,6 +185,7 @@ void CommandGroup::OperatorCommands(){
     // Comandos do Operador
 
     if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonBACK)){safeLock = !safeLock;}
+    if(operatorStick.GetRawButtonPressed(JoystickConstants::buttonSTART)){RobotArm.armControlDirection = 0;}
     if(operatorStick.GetRawButton(JoystickConstants::buttonX)) {RobotIntake.IntakeFeed(safeLock, 1, RobotIntake.ReleasePercent);}
     else if(operatorStick.GetRawButton(JoystickConstants::buttonB)) {RobotIntake.IntakeFeed(safeLock, -1, IntakeConstants::percentIntakeCollect);}
     else {RobotIntake.IntakeFeed(safeLock, 0.0, 0.0);}

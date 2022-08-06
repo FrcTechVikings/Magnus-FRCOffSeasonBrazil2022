@@ -9,6 +9,8 @@ class Arm {
 
     public:
 
+        int armControlDirection = 0;
+
         WPI_VictorSPX armMotor = {MotorsConstants::armRedline};
         WPI_VictorSPX armHolder = {MotorsConstants::armSnowBlower};
 
@@ -27,6 +29,5 @@ class Arm {
     private:
 
         double operatorStickValue = 0.0;
-        int armControlDirection = 0;
 
 };

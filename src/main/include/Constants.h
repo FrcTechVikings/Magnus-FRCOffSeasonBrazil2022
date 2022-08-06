@@ -12,6 +12,8 @@ namespace AutoConstants{
     const std::string OneCargoAutoMoreOption = "Uma Cargo e 2.2 metros - NOVO";
     const std::string OneCargoAutoLessOption = "Uma Cargo e 1.8 metros - NOVO";
 
+    const std::string OneCargoAutoVariableDist = "Uma Cargo e distância variável - NUNCA TESTADO";
+
     namespace OneCargoAuto{
 
         const double delayOneCargoAuto = 7.0; // Seconds ////////// Definir ainda!
@@ -22,9 +24,10 @@ namespace AutoConstants{
         const double exitingTarmacTime = 6.3; // Seconds
 
         const double slightlyWalkForwardDistance = 0.35; // Meters
+
         const double exitingTarmacDistance = 2.0; // Meters
-        const double exitingTarmacDistanceMore = 2.2;
-        const double exitingTarmacDistanceLess = 1.8;
+        const double exitingTarmacDistanceMore = 2.2; //Meters
+        const double exitingTarmacDistanceLess = 1.8; //Meters
 
     }
 

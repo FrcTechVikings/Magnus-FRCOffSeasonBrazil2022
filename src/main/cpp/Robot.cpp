@@ -7,7 +7,9 @@
 void Robot::RobotInit() {
 
   // Adiciona as opções de autônomo
-  m_chooser.SetDefaultOption(AutoConstants::OneCargoAutoOption, AutoConstants::OneCargoAutoOption);
+  m_chooser.SetDefaultOption(AutoConstants::OneCargoAutoVariableDist, AutoConstants::OneCargoAutoVariableDist);
+
+  m_chooser.AddOption(AutoConstants::OneCargoAutoOption, AutoConstants::OneCargoAutoOption);
   m_chooser.AddOption(AutoConstants::ExitTarmacDelayOption, AutoConstants::ExitTarmacDelayOption);
   m_chooser.AddOption(AutoConstants::ExitTarmacOption, AutoConstants::ExitTarmacOption);
   m_chooser.AddOption(AutoConstants::OneCargoAutoDelayOption, AutoConstants::OneCargoAutoDelayOption);
@@ -16,8 +18,6 @@ void Robot::RobotInit() {
   m_chooser.AddOption(AutoConstants::OneCargoAutoWalkOption, AutoConstants::OneCargoAutoWalkOption);
   m_chooser.AddOption(AutoConstants::OneCargoAutoMoreOption, AutoConstants::OneCargoAutoMoreOption);
   m_chooser.AddOption(AutoConstants::OneCargoAutoLessOption, AutoConstants::OneCargoAutoLessOption);
-
-  m_chooser.AddOption(AutoConstants::OneCargoAutoVariableDist, AutoConstants::OneCargoAutoVariableDist);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -50,7 +50,7 @@ void Robot::AutonomousPeriodic() {
   }else if(m_autoSelected == AutoConstants::OneCargoAutoMoreOption){RobotCommands.OneCargoAuto(0.0, 0.0, AutoConstants::OneCargoAuto::exitingTarmacDistanceMore);
   }else if(m_autoSelected == AutoConstants::OneCargoAutoLessOption){RobotCommands.OneCargoAuto(0.0, 0.0, AutoConstants::OneCargoAuto::exitingTarmacDistanceLess);
   
-  }else if(m_autoSelected == AutoConstants::OneCargoAutoVariableDist){RobotCommands.OneCargoAuto(0.0, 0.0, frc::SmartDashboard::GetNumber("distanciaVariavel", 2.0));}
+  }else if(m_autoSelected == AutoConstants::OneCargoAutoVariableDist){RobotCommands.OneCargoAuto(frc::SmartDashboard::GetNumber("Tempo", 0.0), frc::SmartDashboard::GetNumber("Aproximar", 0.5), frc::SmartDashboard::GetNumber("SairTarmac", 2.0));}
 
 }
 

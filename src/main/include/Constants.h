@@ -8,15 +8,15 @@ namespace AutoConstants{
     const std::string OneCargoAutoDelayWalkOption = "Uma Cargo com Delay, Movimentação e 2 metros";
     const std::string OneCargoAutoWalkOption = "Uma Cargo com Movimentação e 2 metros";
 
-    const std::string OneCargoAutoOption = "Uma Cargo e 2 metros - NOVO";
-    const std::string OneCargoAutoMoreOption = "Uma Cargo e 2.2 metros - NOVO";
-    const std::string OneCargoAutoLessOption = "Uma Cargo e 1.8 metros - NOVO";
+    const std::string OneCargoAutoOption = "Uma Cargo e 2 metros";
+    const std::string OneCargoAutoMoreOption = "Uma Cargo e 2.2 metros";
+    const std::string OneCargoAutoLessOption = "Uma Cargo e 1.8 metros";
 
-    const std::string OneCargoAutoVariableDist = "Uma Cargo e distância variável - NUNCA TESTADO";
+    const std::string OneCargoAutoVariableDist = "Uma Cargo e distância variável";
 
     namespace OneCargoAuto{
 
-        const double delayOneCargoAuto = 7.0; // Seconds ////////// Definir ainda!
+        const double delayOneCargoAuto = 6.0; // Seconds ////////// Definir ainda!
 
         const double robotStartConfigTime = 0.4; // Seconds
         const double slightlyWalkForwardTime = 1.6; // Seconds
@@ -75,7 +75,7 @@ namespace IntakeConstants {
 
 namespace ArmConstants {
 
-    const double armPercentConstrain = 0.6;
+    const double armPercentConstrain = 0.8;
     const double armKeepUp = 0.05;
     const double holderPercent = 0.4;
     const double operatorArmDeadBand = 0.5;

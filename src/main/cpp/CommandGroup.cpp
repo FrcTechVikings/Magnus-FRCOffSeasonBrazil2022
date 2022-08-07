@@ -7,8 +7,6 @@ void CommandGroup::InitAutoCommands(){
     RobotDrivetrain.frontRightDriving.SetNeutralMode(NeutralMode::Brake);
     RobotDrivetrain.rearRightDriving.SetNeutralMode(NeutralMode::Brake);
 
-    frc::SmartDashboard::PutNumber("distanciaVariavel", 2.0);
-
     // Levanta o braço do robô no início do autônomo
     RobotArm.ArmSwitchUp();
 
@@ -28,7 +26,7 @@ void CommandGroup::OneCargoAuto(double delaySeconds, double dist, double tarmacE
     if(autoTimer.Get().value() <= AutoConstants::OneCargoAuto::robotStartConfigTime){
 
         // Levanta o braço e solta a trava de segurança
-        RobotArm.armHolder.Set(ControlMode::PercentOutput, -0.2);
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, -0.3);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
@@ -104,7 +102,7 @@ void CommandGroup::ExitTarmacAuto(double delaySeconds){
     if(autoTimer.Get().value() <= AutoConstants::ExitTarmac::robotStartConfigTime){
 
         // Levanta o braço e solta a trava de segurança
-        RobotArm.armHolder.Set(ControlMode::PercentOutput, -0.2);
+        RobotArm.armHolder.Set(ControlMode::PercentOutput, -0.3);
         RobotIntake.intakeMotor.Set(ControlMode::PercentOutput, 0.0);
         RobotDrivetrain.m_robotDrive.CurvatureDrive(0.0, 0.0, true);
 
@@ -155,6 +153,10 @@ void CommandGroup::InitCommands(){
     RobotDrivetrain.DrivetrainInit();
     RobotIntake.IntakeInit();
     RobotArm.ArmInit();
+
+    frc::SmartDashboard::PutNumber("SairTarmac", 2.0);
+    frc::SmartDashboard::PutNumber("Aproximar", 0.0);
+    frc::SmartDashboard::PutNumber("Tempo", 0.0);
 
     safeLock = 1;
 

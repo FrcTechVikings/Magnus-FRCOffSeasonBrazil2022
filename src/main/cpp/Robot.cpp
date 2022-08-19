@@ -8,7 +8,7 @@
 
 void Robot::RobotInit() {
 
-  // Adiciona as opções de autônomo
+  // Adiciona as opções do modo autônomo
   m_chooser.SetDefaultOption(AutoConstants::oneCargoAutoVariableDist, AutoConstants::oneCargoAutoVariableDist);
   m_chooser.AddOption(AutoConstants::nothingAuto, AutoConstants::nothingAuto);
 

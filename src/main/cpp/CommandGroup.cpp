@@ -218,6 +218,4 @@ void CommandGroup::Log(){
     if(safeLock == 1){frc::SmartDashboard::PutBoolean("SafeLock", 1);}
     else{frc::SmartDashboard::PutBoolean("SafeLock", 0);}
 
-
-    
 }
